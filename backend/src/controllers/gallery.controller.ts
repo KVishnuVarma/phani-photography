@@ -24,12 +24,11 @@ export const getGallery = async (_: Request, res: Response) => {
 export const deleteImage = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const deleted = await Gallery.find({_id : id})
-    if (deleted.length == 1) {
-      const delete1 = await Gallery.deleteOne({id : deleted[0]._id})
-      if(delete1) {
-          res.status(200).json({ message: 'Deleted successfully' });
-      }
+    const deleted = await Gallery.findByIdAndDelete(id);
+    if (deleted) {
+      res.status(200).json({ message: 'Deleted successfully' });
+    } else {
+      res.status(404).json({ message: 'Image not found' });
     }
   } catch (error) {
     res.status(500).json({ message: 'Failed to delete image', error });

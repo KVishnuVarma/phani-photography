@@ -3,7 +3,7 @@ import User from '../models/User';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = 'your_jwt_secret_key'; // ⚠️ Use process.env.JWT_SECRET in production
+const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
 
 // Register a new user
 export const register = async (req: Request, res: Response, next: NextFunction): Promise<void> => {

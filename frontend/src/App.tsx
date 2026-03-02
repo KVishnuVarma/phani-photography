@@ -1,10 +1,11 @@
-import React from 'react';
-import UserDashboard from './Pages/Users/UserDashboard';
+import { AuthProvider } from './context/AuthContext';
+import Router from './router/Router';
+
 function App() {
   return (
-    <div>
-      <UserDashboard />
-    </div>
+    <AuthProvider>
+      <Router />
+    </AuthProvider>
   );
 }
 

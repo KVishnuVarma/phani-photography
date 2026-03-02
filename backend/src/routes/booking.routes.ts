@@ -13,54 +13,54 @@ import { isAdmin } from '../middleware/isAdmin';
 const router = Router();
 
 // 🔐 Create a new booking (Authenticated users)
-router.post('/bookings', verifyToken, async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
   try {
-    await createBooking(req, res); // Call the controller without returning anything
+    await createBooking(req, res);
   } catch (error) {
     res.status(500).json({ message: 'Error in creating booking', error });
   }
 });
 
 // 🔐 Get all bookings (Admin only)
-router.get('/bookings', verifyToken, isAdmin, async (req, res) => {
+router.get('/', verifyToken, isAdmin, async (req, res) => {
   try {
-    await getBookings(req, res); // Call the controller and handle the response
+    await getBookings(req, res);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching bookings', error });
   }
 });
 
 // 🔐 Get bookings for a specific user
-router.get('/bookings/user/:userId', verifyToken, async (req, res) => {
+router.get('/user/:userId', verifyToken, async (req, res) => {
   try {
-    await getUserBookings(req, res); // Call the controller for getting user bookings
+    await getUserBookings(req, res);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching user bookings', error });
   }
 });
 
 // 🔐 Get a specific booking by ID
-router.get('/bookings/:id', verifyToken, async (req, res) => {
+router.get('/:id', verifyToken, async (req, res) => {
   try {
-    await getBookingById(req, res); // Call the controller for fetching booking by ID
+    await getBookingById(req, res);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching booking details', error });
   }
 });
 
 // 🔐 Update booking status
-router.patch('/bookings/:id/status', verifyToken, async (req, res) => {
+router.put('/:id', verifyToken, async (req, res) => {
   try {
-    await updateBookingStatus(req, res); // Call the controller to update booking status
+    await updateBookingStatus(req, res);
   } catch (error) {
     res.status(500).json({ message: 'Error updating booking status', error });
   }
 });
 
 // 🔐 Delete a booking (Admin only)
-router.delete('/bookings/:id', verifyToken, isAdmin, async (req, res) => {
+router.delete('/:id', verifyToken, isAdmin, async (req, res) => {
   try {
-    await deleteBooking(req, res); // Call the controller to delete the booking
+    await deleteBooking(req, res);
   } catch (error) {
     res.status(500).json({ message: 'Error deleting booking', error });
   }

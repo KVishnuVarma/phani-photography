@@ -7,13 +7,15 @@ import {
   updatePackage,
   deletePackage
 } from '../controllers/package.controller';
+import { verifyToken } from '../middleware/auth';
+import { isAdmin } from '../middleware/isAdmin';
 
 const router = express.Router();
 
-router.get('/packages', asyncHandler(getAllPackages));
-router.get('/packages/:id', asyncHandler(getPackageById));
-router.post('/packages', asyncHandler(createPackage));
-router.put('/packages/:id', asyncHandler(updatePackage));
-router.delete('/packages/:id', asyncHandler(deletePackage));
+router.get('/', asyncHandler(getAllPackages));
+router.get('/:id', asyncHandler(getPackageById));
+router.post('/', verifyToken, isAdmin, asyncHandler(createPackage));
+router.put('/:id', verifyToken, isAdmin, asyncHandler(updatePackage));
+router.delete('/:id', verifyToken, isAdmin, asyncHandler(deletePackage));
 
 export default router;
