@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { getUserBookings } from "../../api";
@@ -16,11 +15,6 @@ interface Booking {
 }
 
 const UserDashboard: React.FC = () => {
-  const { scrollY } = useScroll();
-  const yImage = useTransform(scrollY, [0, 600], [0, -200]);
-  const scaleImage = useTransform(scrollY, [0, 600], [1.2, 1.4]);
-  const yText = useTransform(scrollY, [0, 600], [0, -60]);
-
   const { user, token, logout } = useAuth();
   const navigate = useNavigate();
   const [bookings, setBookings] = useState<Booking[]>([]);

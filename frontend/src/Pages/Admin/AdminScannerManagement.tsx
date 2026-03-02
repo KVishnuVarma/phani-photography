@@ -7,7 +7,6 @@ import {
   deleteScanner,
   toggleScannerStatus,
 } from '../../api';
-import { useAuth } from '../../context/AuthContext';
 
 interface Scanner {
   _id: string;
@@ -30,8 +29,6 @@ const SCANNER_TYPES = [
 ];
 
 const AdminScannerManagement: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { user } = useAuth();
   const [scanners, setScanners] = useState<Scanner[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAddingNew, setIsAddingNew] = useState(false);
