@@ -1,3 +1,4 @@
+ 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
@@ -11,7 +12,9 @@ import {
 
 interface Booking {
   _id: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   userId: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageId: any;
   sessionDate: string;
   status: string;
@@ -30,7 +33,7 @@ interface Metrics {
 }
 
 const AdminDashboardHome: React.FC = () => {
-  const { user, token } = useAuth();
+  const { token } = useAuth();
 
   const [metrics, setMetrics] = useState<Metrics>({
     todayBookings: 0,
@@ -59,6 +62,7 @@ const AdminDashboardHome: React.FC = () => {
         setRecentBookings(recentData);
         setUpcomingPhotoshoots(upcomingData);
         setAllBookings(allData);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         setError(err.message || 'Failed to load dashboard data');
       } finally {
@@ -104,21 +108,25 @@ const AdminDashboardHome: React.FC = () => {
             label: "Today's Bookings",
             value: metrics.todayBookings,
             color: 'from-primary-600 to-primary-500',
+            icon: '📅',
           },
           {
             label: 'Weekly Bookings',
             value: metrics.weeklyBookings,
             color: 'from-primary-600 to-primary-500',
+            icon: '📊',
           },
           {
             label: 'Monthly Revenue',
             value: `$${metrics.monthlyRevenue}`,
             color: 'from-green-600 to-green-500',
+            icon: '💰',
           },
           {
             label: 'Total Clients',
             value: metrics.totalClients,
             color: 'from-blue-600 to-blue-500',
+            icon: '👥',
           },
         ].map((metric, index) => (
           <motion.div
@@ -126,10 +134,13 @@ const AdminDashboardHome: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className={`bg-gradient-to-br ${metric.color} p-6 rounded-lg text-white dark:text-white`}
+            className={`bg-gradient-to-br ${metric.color} p-6 rounded-lg text-white dark:text-white shadow-lg`}
           >
-            <p className="text-sm font-semibold opacity-90">{metric.label}</p>
-            <p className="text-4xl font-bold mt-2">{metric.value}</p>
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-sm font-semibold opacity-90">{metric.label}</p>
+              <span className="text-3xl">{metric.icon}</span>
+            </div>
+            <p className="text-5xl font-bold">{metric.value}</p>
           </motion.div>
         ))}
       </div>
@@ -139,9 +150,9 @@ const AdminDashboardHome: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="bg-white dark:bg-neutral-800 p-6 rounded-lg mb-12 border border-neutral-200 dark:border-neutral-700"
+        className="bg-white dark:bg-neutral-800 p-6 rounded-lg mb-12 border border-neutral-200 dark:border-neutral-700 shadow-md"
       >
-        <h2 className="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400">Recent Bookings</h2>
+        <h2 className="text-3xl font-bold mb-6 text-primary-700 dark:text-primary-300 font-serif">Recent Bookings</h2>
         {recentBookings.length === 0 ? (
           <p className="text-neutral-600 dark:text-neutral-400">No recent bookings</p>
         ) : (
@@ -178,9 +189,9 @@ const AdminDashboardHome: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="bg-white dark:bg-neutral-800 p-6 rounded-lg mb-12 border border-neutral-200 dark:border-neutral-700"
+        className="bg-white dark:bg-neutral-800 p-6 rounded-lg mb-12 border border-neutral-200 dark:border-neutral-700 shadow-md"
       >
-        <h2 className="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400">Upcoming Photoshoots</h2>
+        <h2 className="text-3xl font-bold mb-6 text-primary-700 dark:text-primary-300 font-serif">Upcoming Photoshoots</h2>
         {upcomingPhotoshoots.length === 0 ? (
           <p className="text-neutral-600 dark:text-neutral-400">No upcoming photoshoots</p>
         ) : (
@@ -229,9 +240,9 @@ const AdminDashboardHome: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
-        className="bg-white dark:bg-neutral-800 p-6 rounded-lg border border-neutral-200 dark:border-neutral-700"
+        className="bg-white dark:bg-neutral-800 p-6 rounded-lg border border-neutral-200 dark:border-neutral-700 shadow-md"
       >
-        <h2 className="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400">Manage Bookings</h2>
+        <h2 className="text-3xl font-bold mb-6 text-primary-700 dark:text-primary-300 font-serif">Manage Bookings</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-neutral-900 dark:text-white">
             <thead>

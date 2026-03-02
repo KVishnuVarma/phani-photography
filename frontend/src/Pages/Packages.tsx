@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { getAllPackages } from '../api';
 import { useAuth } from '../context/AuthContext';
-import ThemeToggle from '../Components/ThemeToggle';
+import Navbar from '../Components/Navbar';
 
 interface Package {
   _id: string;
@@ -28,6 +28,7 @@ const PackagesPage: React.FC = () => {
       try {
         const data = await getAllPackages();
         setPackages(data);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         setError(err.message || 'Failed to load packages');
       } finally {
@@ -57,18 +58,13 @@ const PackagesPage: React.FC = () => {
   return (
     <div className="w-full min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50">
       {/* Navigation */}
-      <nav className="sticky top-0 z-40 bg-neutral-50/95 dark:bg-neutral-950/95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 px-4 sm:px-6 md:px-8 py-4">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <h1 className="text-xl sm:text-2xl font-bold text-primary-700 dark:text-primary-400">Packages</h1>
-          <ThemeToggle />
-        </div>
-      </nav>
+      <Navbar />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-20"
+        className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-20 pt-24"
       >
         <h1 className="text-4xl sm:text-5xl font-bold mb-3 sm:mb-4 text-center text-primary-700 dark:text-primary-400">Our Packages</h1>
         <p className="text-center text-neutral-600 dark:text-neutral-400 mb-12 sm:mb-16 text-base sm:text-lg">

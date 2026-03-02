@@ -3,10 +3,14 @@ import { useAuth } from '../../context/AuthContext';
 import { getBookings, updateBookingStatus, deleteBooking } from '../../api';
 import { motion } from 'framer-motion';
 
+interface Package {
+  title: string;
+}
+
 interface Booking {
   _id: string;
-  userId: any;
-  packageId: any;
+  userId: unknown;
+  packageId?: Package;
   sessionDate: string;
   status: 'Pending' | 'Confirmed' | 'Scheduled' | 'Completed' | 'Cancelled';
   amount: number;
@@ -29,6 +33,7 @@ const AdminBookingManagement: React.FC = () => {
 
   useEffect(() => {
     fetchBookings();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -44,6 +49,7 @@ const AdminBookingManagement: React.FC = () => {
     try {
       const data = await getBookings(token);
       setBookings(data);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || 'Failed to load bookings');
     } finally {
@@ -58,6 +64,7 @@ const AdminBookingManagement: React.FC = () => {
       await updateBookingStatus(bookingId, newStatus, token);
       setSuccess(`Booking status updated to ${newStatus}!`);
       await fetchBookings();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || 'Failed to update booking status');
     }
@@ -71,6 +78,7 @@ const AdminBookingManagement: React.FC = () => {
       await deleteBooking(bookingId, token);
       setSuccess('Booking deleted successfully!');
       await fetchBookings();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || 'Failed to delete booking');
     }
@@ -212,7 +220,7 @@ const AdminBookingManagement: React.FC = () => {
         transition={{ delay: 0.2 }}
         className="space-y-4"
       >
-        <h2 className="text-2xl font-bold text-primary-700 dark:text-primary-400">Booking Details</h2>
+        <h2 className="text-3xl font-bold text-primary-700 dark:text-primary-300 font-serif">Booking Details</h2>
 
         {filteredBookings.length === 0 ? (
           <div className="bg-white dark:bg-neutral-800 p-8 rounded text-center text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700">

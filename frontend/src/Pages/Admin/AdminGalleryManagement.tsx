@@ -31,6 +31,7 @@ const AdminGalleryManagement: React.FC = () => {
     try {
       const data = await getGalleryImages();
       setImages(data);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || 'Failed to load gallery');
     } finally {
@@ -56,6 +57,7 @@ const AdminGalleryManagement: React.FC = () => {
       setSuccess('Image uploaded successfully!');
       setFormData({ imageUrl: '', caption: '' });
       await fetchImages();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || 'Failed to upload image');
     } finally {
@@ -71,6 +73,7 @@ const AdminGalleryManagement: React.FC = () => {
       await deleteImage(imageId, token);
       setSuccess('Image deleted successfully!');
       await fetchImages();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || 'Failed to delete image');
     }
@@ -92,7 +95,7 @@ const AdminGalleryManagement: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         className="bg-white dark:bg-neutral-800 p-8 rounded-lg border border-neutral-200 dark:border-neutral-700"
       >
-        <h2 className="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400">Upload New Image</h2>
+        <h2 className="text-3xl font-bold mb-6 text-primary-700 dark:text-primary-300 font-serif">Upload New Image</h2>
 
         {error && (
           <div className="bg-red-600/20 border border-red-600 text-red-600 dark:text-red-400 px-4 py-3 rounded mb-4">
@@ -147,7 +150,7 @@ const AdminGalleryManagement: React.FC = () => {
         transition={{ delay: 0.2 }}
         className="bg-white dark:bg-neutral-800 p-8 rounded-lg border border-neutral-200 dark:border-neutral-700"
       >
-        <h2 className="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400">Gallery Images ({images.length})</h2>
+        <h2 className="text-3xl font-bold mb-6 text-primary-700 dark:text-primary-300 font-serif">Gallery Images ({images.length})</h2>
 
         {images.length === 0 ? (
           <p className="text-neutral-600 dark:text-neutral-400 text-center py-8">No images in gallery yet</p>

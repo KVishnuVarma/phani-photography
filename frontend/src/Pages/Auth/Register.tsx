@@ -36,6 +36,7 @@ const Register: React.FC = () => {
 
       login(loginResponse.user, loginResponse.token);
       navigate('/user/dashboard');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || 'Registration failed');
     } finally {

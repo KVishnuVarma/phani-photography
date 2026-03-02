@@ -1,3 +1,6 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
+
 @import "tailwindcss";
 
 /* Light Mode Colors - Blue & Grey Professional */
@@ -45,10 +48,115 @@
 
 html {
   @apply scroll-smooth;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 body {
   @apply bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-50;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: rgb(var(--text-light, 21 25 41));
+}
+
+:root.dark h1,
+:root.dark h2,
+:root.dark h3,
+:root.dark h4,
+:root.dark h5,
+:root.dark h6 {
+  color: rgb(var(--text-dark, 248 249 250));
+}
+
+h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 1.3;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+}
+
+h5 {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+h6 {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: rgb(var(--text-light-secondary, 73 80 87));
+}
+
+:root.dark p {
+  color: rgb(var(--text-dark-secondary, 203 213 225));
+}
+
+/* Emphasis and highlights */
+strong, b {
+  font-weight: 600;
+  color: rgb(var(--text-light));
+}
+
+:root.dark strong,
+:root.dark b {
+  color: rgb(var(--text-dark));
+}
+
+em, i {
+  font-style: italic;
+}
+
+/* Links */
+a {
+  color: rgb(69 111 159);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: rgb(38 61 121);
+  text-decoration: underline;
+}
+
+:root.dark a {
+  color: rgb(141 169 197);
+}
+
+:root.dark a:hover {
+  color: rgb(176 199 227);
 }
 
 /* Scrollbar Styling */

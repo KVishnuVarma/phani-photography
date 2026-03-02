@@ -11,6 +11,9 @@ export interface IBooking extends Document {
     phone: string;
     email: string;
   };
+  paymentType?: 'Now' | 'Later';
+  paymentStatus?: 'Not Started' | 'Pending' | 'Verified' | 'Rejected' | 'Refunded';
+  paymentId?: mongoose.Schema.Types.ObjectId;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -44,6 +47,21 @@ const bookingSchema: Schema<IBooking> = new mongoose.Schema(
       name: { type: String, required: true },
       phone: { type: String, required: true },
       email: { type: String, required: true },
+    },
+    paymentType: {
+      type: String,
+      enum: ['Now', 'Later'],
+      default: 'Later',
+    },
+    paymentStatus: {
+      type: String,
+      enum: ['Not Started', 'Pending', 'Verified', 'Rejected', 'Refunded'],
+      default: 'Not Started',
+    },
+    paymentId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Payment',
+      default: null,
     },
   },
   { timestamps: true }

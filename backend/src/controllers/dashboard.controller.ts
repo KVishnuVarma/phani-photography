@@ -11,20 +11,20 @@ export const getDashboardMetrics = async (req: Request, res: Response) =>{
     tomorrow.setDate(tomorrow.getDate() + 1);
 
     const todayBookings = await Booking.countDocuments({
-      bookingDate: { $gte: today, $lt: tomorrow },
+      sessionDate: { $gte: today, $lt: tomorrow },
     });
 
     const last7Days = new Date();
-    last7Days.setDate(last7Days.getDate() -7);
+    last7Days.setDate(last7Days.getDate() - 7);
 
     const weeklyBookings = await Booking.countDocuments({
-      bookingDate: { $gte: last7Days },
+      sessionDate: { $gte: last7Days },
     });
 
     const monthlyRevenueAgg = await Booking.aggregate([
       {
         $match: {
-          bookingDate: {
+          sessionDate: {
             $gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
           },
         },
@@ -56,8 +56,8 @@ export const getRecentBookings = async (_: Request, res: Response) => {
     const bookings = await Booking.find()
       .sort({ createdAt: -1 })
       .limit(5)
-      .populate('userId', 'name')
-      .populate('packageId', 'name');
+      .populate('userId', 'username email')
+      .populate('packageId', 'title description price category');
 
     res.status(200).json(bookings);
   } catch (error) {
@@ -68,10 +68,10 @@ export const getRecentBookings = async (_: Request, res: Response) => {
 export const getUpcomingPhotoshoots = async (_: Request, res: Response) => {
   try {
     const today = new Date();
-    const upcoming = await Booking.find({ bookingDate: { $gt: today } })
-      .sort({ bookingDate: 1 })
-      .populate('userId', 'name')
-      .populate('packageId', 'name')
+    const upcoming = await Booking.find({ sessionDate: { $gt: today } })
+      .sort({ sessionDate: 1 })
+      .populate('userId', 'username email')
+      .populate('packageId', 'title description price category')
       .limit(5);
 
     res.status(200).json(upcoming);

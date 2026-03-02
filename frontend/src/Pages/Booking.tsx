@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { getPackageById, createBooking } from '../api';
+import { getPackageById, createBooking, createPayment } from '../api';
 import ThemeToggle from '../Components/ThemeToggle';
+import PaymentModal from '../Components/PaymentModal';
+import AdvancePaymentForm from '../Components/AdvancePaymentForm';
 
 interface Package {
   _id: string;
@@ -19,6 +21,10 @@ const BookingPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [bookingId, setBookingId] = useState<string | null>(null);
+  const [bookingAmount, setBookingAmount] = useState(0);
 
   const [formData, setFormData] = useState({
     sessionDate: '',
@@ -34,6 +40,7 @@ const BookingPage: React.FC = () => {
       try {
         const data = await getPackageById(packageId);
         setPkg(data);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         setError(err.message || 'Failed to load package');
       } finally {
@@ -43,6 +50,49 @@ const BookingPage: React.FC = () => {
 
     fetchPackage();
   }, [packageId]);
+
+  const handlePayNow = () => {
+    setShowPaymentModal(false);
+    setShowPaymentForm(true);
+  };
+
+  const handlePayLater = () => {
+    setShowPaymentModal(false);
+    navigate('/user/dashboard');
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handlePaymentSubmit = async (paymentFormData: any) => {
+    if (!bookingId || !user || !token) return;
+
+    try {
+      const paymentData = {
+        bookingId,
+        userId: user.id,
+        amount: paymentFormData.amount,
+        paymentMethod: paymentFormData.paymentMethod,
+        upiId: paymentFormData.upiId,
+        displayName: paymentFormData.displayName,
+        transactionId: paymentFormData.transactionId,
+        screenshot: paymentFormData.screenshot,
+      };
+
+      await createPayment(paymentData, token);
+      setShowPaymentForm(false);
+      
+      // Show success message and redirect
+      alert('Payment submitted successfully! Admin will verify within 2-4 hours.');
+      navigate('/user/dashboard');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      alert('Failed to submit payment: ' + (err.message || 'Unknown error'));
+    }
+  };
+
+  const handlePaymentCancel = () => {
+    setShowPaymentForm(false);
+    navigate('/user/dashboard');
+  };
 
   useEffect(() => {
     if (user) {
@@ -74,8 +124,17 @@ const BookingPage: React.FC = () => {
         },
       };
 
-      await createBooking(bookingData, token);
-      navigate('/user/dashboard');
+      const response = await createBooking(bookingData, token);
+      
+      // Check if booking was created successfully
+      if (response?._id) {
+        setBookingId(response._id);
+        setBookingAmount(pkg.price);
+        setShowPaymentModal(true);
+      } else {
+        setError('Booking created but failed to get booking ID');
+      }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || 'Failed to create booking');
     } finally {
@@ -105,6 +164,30 @@ const BookingPage: React.FC = () => {
       <div className="absolute top-6 right-6">
         <ThemeToggle />
       </div>
+
+      {/* Payment Modal */}
+      <PaymentModal
+        isOpen={showPaymentModal}
+        bookingId={bookingId || ''}
+        bookingAmount={bookingAmount}
+        onPayNow={handlePayNow}
+        onPayLater={handlePayLater}
+        onClose={() => {
+          setShowPaymentModal(false);
+          navigate('/user/dashboard');
+        }}
+      />
+
+      {/* Payment Form */}
+      {showPaymentForm && bookingId && (
+        <AdvancePaymentForm
+          bookingId={bookingId}
+          bookingAmount={bookingAmount}
+          token={token || ''}
+          onSubmit={handlePaymentSubmit}
+          onCancel={handlePaymentCancel}
+        />
+      )}
 
       <div className="max-w-2xl mx-auto">
         <div className="bg-white dark:bg-neutral-800 rounded-lg shadow-xl p-8 border border-neutral-200 dark:border-neutral-700">

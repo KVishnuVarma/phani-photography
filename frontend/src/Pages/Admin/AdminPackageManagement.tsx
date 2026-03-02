@@ -30,7 +30,7 @@ const AdminPackageManagement: React.FC = () => {
 
   const [formData, setFormData] = useState({
     title: '',
-    category: 'Wedding' as const,
+    category: 'Wedding' as 'Wedding' | 'Birthday' | 'Outdoor',
     price: 0,
     photosIncluded: 0,
     description: '',
@@ -46,6 +46,7 @@ const AdminPackageManagement: React.FC = () => {
     try {
       const data = await getAllPackages();
       setPackages(data);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || 'Failed to load packages');
     } finally {
@@ -108,6 +109,7 @@ const AdminPackageManagement: React.FC = () => {
 
       await fetchPackages();
       resetForm();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || 'Failed to save package');
     } finally {
@@ -123,6 +125,7 @@ const AdminPackageManagement: React.FC = () => {
       await deletePackage(packageId, token);
       setSuccess('Package deleted successfully!');
       await fetchPackages();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || 'Failed to delete package');
     }
@@ -136,7 +139,7 @@ const AdminPackageManagement: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         className="bg-white dark:bg-neutral-800 p-8 rounded-lg border border-neutral-200 dark:border-neutral-700"
       >
-        <h2 className="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400">
+        <h2 className="text-3xl font-bold mb-6 text-primary-700 dark:text-primary-300 font-serif">
           {editingId ? 'Edit Package' : 'Create New Package'}
         </h2>
 
@@ -169,6 +172,7 @@ const AdminPackageManagement: React.FC = () => {
             <select
               value={formData.category}
               onChange={(e) =>
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 setFormData({ ...formData, category: e.target.value as any })
               }
               className="w-full px-4 py-2 bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded border border-neutral-300 dark:border-neutral-600 focus:border-primary-500 dark:focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
@@ -265,7 +269,7 @@ const AdminPackageManagement: React.FC = () => {
         transition={{ delay: 0.2 }}
         className="bg-white dark:bg-neutral-800 p-8 rounded-lg border border-neutral-200 dark:border-neutral-700"
       >
-        <h2 className="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400">All Packages ({packages.length})</h2>
+        <h2 className="text-3xl font-bold mb-6 text-primary-700 dark:text-primary-300 font-serif">All Packages ({packages.length})</h2>
 
         {loading ? (
           <p className="text-neutral-600 dark:text-neutral-400">Loading packages...</p>

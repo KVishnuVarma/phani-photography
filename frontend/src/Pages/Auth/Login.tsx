@@ -21,6 +21,7 @@ const Login: React.FC = () => {
       const response = await loginUser(email, password);
       login(response.user, response.token);
       navigate(response.user.role === 'admin' ? '/admin/dashboard' : '/user/dashboard');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || 'Login failed');
     } finally {

@@ -8,6 +8,7 @@ import PackagesPage from '../Pages/Packages';
 import BookingPage from '../Pages/Booking';
 import ContactPage from '../Pages/Contact';
 import UserDashboard from '../Pages/Users/UserDashboard';
+import Profile from '../Pages/Users/Profile';
 import AdminDashboard from '../Pages/AdminDashboard';
 import ProtectedRoute from '../Components/ProtectedRoute';
 
@@ -49,6 +50,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute requiredRole="user">
         <UserDashboard />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/profile',
+    element: (
+      <ProtectedRoute requiredRole="user">
+        <Profile />
       </ProtectedRoute>
     ),
   },

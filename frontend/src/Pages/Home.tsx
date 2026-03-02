@@ -1,45 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import ThemeToggle from '../Components/ThemeToggle';
+import Navbar from '../Components/Navbar';
 
 const HomePage: React.FC = () => {
   return (
     <div className="w-full min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-neutral-50/95 dark:bg-neutral-950/95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-xl sm:text-2xl font-bold text-primary-700 dark:text-primary-400">Photography Studio</h1>
-          <div className="flex gap-3 sm:gap-6 items-center">
-            <Link to="/gallery" className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition">
-              Gallery
-            </Link>
-            <Link to="/packages" className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition">
-              Packages
-            </Link>
-            <Link
-              to="/contact"
-              className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition"
-            >
-              Contact
-            </Link>
-            <Link
-              to="/login"
-              className="bg-primary-600 hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold transition text-sm sm:text-base"
-            >
-              Login
-            </Link>
-            <ThemeToggle />
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="relative min-h-screen w-full overflow-hidden pt-16 flex items-center">
-        <div
-          className="absolute inset-0 bg-cover bg-center dark:brightness-20 brightness-40 z-0"
-          style={{ backgroundImage: "url('/phani.jpg')" }}
-        />
         <div className="relative z-10 w-full flex flex-col items-center justify-center text-center px-4 py-16 sm:py-24">
           <motion.h1
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4 sm:mb-6 leading-tight drop-shadow-2xl text-white"
@@ -177,6 +148,84 @@ const HomePage: React.FC = () => {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Admin Achievements Section */}
+      <motion.section
+        className="bg-neutral-100 dark:bg-neutral-900 px-4 sm:px-6 md:px-8 py-16 sm:py-24"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-3 sm:mb-4 text-center text-primary-700 dark:text-primary-400">Admin Achievements 🏆</h2>
+          <p className="text-center text-neutral-600 dark:text-neutral-400 mb-12 sm:mb-16 max-w-2xl sm:max-w-3xl mx-auto text-base sm:text-lg">
+            Celebrating our studio's excellence and milestones
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+            {/* Achievement: Photography Virtuoso */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-lg hover:shadow-xl dark:hover:shadow-2xl hover:border-primary-400 dark:hover:border-primary-600 transition border border-neutral-200 dark:border-neutral-700 text-center"
+            >
+              <div className="text-5xl sm:text-6xl mb-3">📸</div>
+              <h3 className="font-bold text-lg sm:text-xl text-neutral-900 dark:text-white mb-2">Photography Virtuoso</h3>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                Master of all photography styles & techniques
+              </p>
+            </motion.div>
+
+            {/* Achievement: Wedding Specialist */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+              viewport={{ once: true }}
+              className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-lg hover:shadow-xl dark:hover:shadow-2xl hover:border-primary-400 dark:hover:border-primary-600 transition border border-neutral-200 dark:border-neutral-700 text-center"
+            >
+              <div className="text-5xl sm:text-6xl mb-3">💒</div>
+              <h3 className="font-bold text-lg sm:text-xl text-neutral-900 dark:text-white mb-2">Wedding Specialist</h3>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                50+ stunning wedding photoshoots completed
+              </p>
+            </motion.div>
+
+            {/* Achievement: Studio Legend */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              viewport={{ once: true }}
+              className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-lg hover:shadow-xl dark:hover:shadow-2xl hover:border-primary-400 dark:hover:border-primary-600 transition border border-neutral-200 dark:border-neutral-700 text-center"
+            >
+              <div className="text-5xl sm:text-6xl mb-3">⭐</div>
+              <h3 className="font-bold text-lg sm:text-xl text-neutral-900 dark:text-white mb-2">Studio Legend</h3>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                100+ happy clients & 95%+ satisfaction rate
+              </p>
+            </motion.div>
+
+            {/* Achievement: Memory Maker */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              viewport={{ once: true }}
+              className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-lg hover:shadow-xl dark:hover:shadow-2xl hover:border-primary-400 dark:hover:border-primary-600 transition border border-neutral-200 dark:border-neutral-700 text-center"
+            >
+              <div className="text-5xl sm:text-6xl mb-3">✨</div>
+              <h3 className="font-bold text-lg sm:text-xl text-neutral-900 dark:text-white mb-2">Memory Maker</h3>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                1000+ perfect moments captured for eternity
+              </p>
+            </motion.div>
           </div>
         </div>
       </motion.section>

@@ -235,3 +235,137 @@ export const submitContactForm = async (_formData: any): Promise<void> => {
 export const bookSession = async (sessionData: any): Promise<void> => {
   return createBooking(sessionData, localStorage.getItem('token') || '');
 };
+// Payment endpoints
+export const createPayment = async (paymentData: any, token: string) => {
+  const response = await fetch(`${API_BASE_URL}/payments/create`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(paymentData),
+  });
+  return handleResponse(response);
+};
+
+export const getPaymentByBooking = async (bookingId: string, token: string) => {
+  const response = await fetch(`${API_BASE_URL}/payments/booking/${bookingId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return handleResponse(response);
+};
+
+export const getPaymentsByUser = async (userId: string, token: string) => {
+  const response = await fetch(`${API_BASE_URL}/payments/user/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return handleResponse(response);
+};
+
+export const getAllPayments = async (token: string) => {
+  const response = await fetch(`${API_BASE_URL}/payments/all`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return handleResponse(response);
+};
+
+export const getPaymentsByStatus = async (status: string, token: string) => {
+  const response = await fetch(`${API_BASE_URL}/payments/status/${status}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return handleResponse(response);
+};
+
+export const updatePaymentStatus = async (
+  paymentId: string,
+  status: string,
+  adminNotes: string,
+  token: string,
+  scannerUrl?: string
+) => {
+  const response = await fetch(`${API_BASE_URL}/payments/verify/${paymentId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ status, adminNotes, scannerUrl }),
+  });
+  return handleResponse(response);
+};
+
+export const getPaymentStats = async (token: string) => {
+  const response = await fetch(`${API_BASE_URL}/payments/stats/overview`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return handleResponse(response);
+};
+
+// Scanner endpoints
+export const getActiveScanners = async () => {
+  const response = await fetch(`${API_BASE_URL}/scanners/active`);
+  return handleResponse(response);
+};
+
+export const getAllScanners = async (token: string) => {
+  const response = await fetch(`${API_BASE_URL}/scanners/all`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return handleResponse(response);
+};
+
+export const uploadScanner = async (scannerData: any, token: string) => {
+  const response = await fetch(`${API_BASE_URL}/scanners/upload`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(scannerData),
+  });
+  return handleResponse(response);
+};
+
+export const updateScanner = async (scannerId: string, scannerData: any, token: string) => {
+  const response = await fetch(`${API_BASE_URL}/scanners/${scannerId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(scannerData),
+  });
+  return handleResponse(response);
+};
+
+export const deleteScanner = async (scannerId: string, token: string) => {
+  const response = await fetch(`${API_BASE_URL}/scanners/${scannerId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return handleResponse(response);
+};
+
+export const toggleScannerStatus = async (scannerId: string, token: string) => {
+  const response = await fetch(`${API_BASE_URL}/scanners/${scannerId}/toggle`, {
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return handleResponse(response);
+};
