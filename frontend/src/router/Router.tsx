@@ -6,6 +6,7 @@ import RegisterPage from '../Pages/Auth/Register';
 import GalleryPage from '../Pages/Gallery';
 import PackagesPage from '../Pages/Packages';
 import BookingPage from '../Pages/Booking';
+import ContactPage from '../Pages/Contact';
 import UserDashboard from '../Pages/Users/UserDashboard';
 import AdminDashboard from '../Pages/AdminDashboard';
 import ProtectedRoute from '../Components/ProtectedRoute';
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: '/packages',
     element: <PackagesPage />,
+  },
+  {
+    path: '/contact',
+    element: <ContactPage />,
   },
   {
     path: '/booking/:packageId',

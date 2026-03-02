@@ -1,1 +1,89 @@
 @import "tailwindcss";
+
+/* Light Mode Colors - Blue & Grey Professional */
+:root {
+  /* Primary: Professional Blue */
+  --primary: 69 111 159; /* blue-600 */
+  --primary-foreground: 240 244 248; /* blue-50 */
+  
+  /* Neutral: Professional Grey */
+  --neutral: 107 114 128; /* grey-600 */
+  --neutral-foreground: 248 249 250; /* grey-50 */
+  
+  /* Backgrounds and Text Colors */
+  --bg-light: 248 249 250; /* Light background: neutral-50 */
+  --bg-light-secondary: 241 245 249; /* neutral-100 */
+  --text-light: 21 25 41; /* Dark text: neutral-900 */
+  --text-light-secondary: 73 80 87; /* neutral-700 */
+  --border-light: 233 236 239; /* neutral-200 */
+}
+
+/* Dark Mode Colors - Blue & Grey Professional */
+:root.dark {
+  color-scheme: dark;
+  
+  /* Primary: Professional Blue */
+  --primary: 141 169 197; /* blue-300 */
+  --primary-foreground: 15 40 70; /* blue-900 */
+  
+  /* Neutral: Professional Grey */
+  --neutral: 173 181 189; /* grey-300 */
+  --neutral-foreground: 21 25 41; /* grey-900 */
+  
+  /* Backgrounds and Text Colors */
+  --bg-dark: 21 25 41; /* Dark background: neutral-900 */
+  --bg-dark-secondary: 52 58 64; /* neutral-800 */
+  --text-dark: 248 249 250; /* Light text: neutral-50 */
+  --text-dark-secondary: 203 213 225; /* neutral-300 */
+  --border-dark: 73 80 87; /* neutral-700 */
+}
+
+/* Global Styles */
+* {
+  @apply transition-colors duration-300;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-50;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-neutral-100 dark:bg-neutral-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-400 dark:bg-neutral-600 rounded-full hover:bg-neutral-500 dark:hover:bg-neutral-500;
+}
+
+/* Selection Styling */
+::selection {
+  background-color: #456f9f;
+  color: white;
+}
+
+::-moz-selection {
+  background-color: #456f9f;
+  color: white;
+}
+
+/* Focus Styles */
+:focus-visible {
+  outline: 2px solid #456f9f;
+  outline-offset: 2px;
+}
+
+/* Smooth Transitions */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    @apply !transition-none !duration-0;
+  }
+}

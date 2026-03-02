@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { registerUser } from '../../api';
+import ThemeToggle from '../../Components/ThemeToggle';
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -43,57 +44,67 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black to-gray-900 flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-xl p-8">
-        <h1 className="text-3xl font-bold text-white mb-6 text-center">Register</h1>
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-950 dark:to-neutral-900 flex items-center justify-center px-4 py-8">
+      {/* Theme Toggle */}
+      <div className="absolute top-6 right-6">
+        <ThemeToggle />
+      </div>
+
+      <div className="w-full max-w-md bg-white dark:bg-neutral-800 rounded-xl shadow-xl dark:shadow-2xl p-6 sm:p-8 border border-neutral-200 dark:border-neutral-800">
+        <h1 className="text-3xl sm:text-4xl font-bold text-primary-700 dark:text-primary-400 mb-2 text-center">Create Account</h1>
+        <p className="text-neutral-600 dark:text-neutral-400 text-center mb-6 text-sm sm:text-base">Join us today</p>
 
         {error && (
-          <div className="bg-red-600/20 border border-red-600 text-red-200 px-4 py-3 rounded mb-4">
+          <div className="bg-red-500/10 dark:bg-red-500/20 border border-red-500/30 dark:border-red-500/50 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg mb-6 text-sm">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-gray-300 mb-2">Username</label>
+            <label className="block text-primary-700 dark:text-neutral-300 mb-2 font-semibold text-sm">Full Name</label>
             <input
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:border-yellow-500 focus:outline-none"
+              className="w-full px-4 py-2.5 bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 rounded-lg border border-neutral-300 dark:border-neutral-700 focus:border-primary-500 dark:focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition"
+              placeholder="John Doe"
               required
             />
           </div>
 
           <div>
-            <label className="block text-gray-300 mb-2">Email</label>
+            <label className="block text-primary-700 dark:text-neutral-300 mb-2 font-semibold text-sm">Email Address</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:border-yellow-500 focus:outline-none"
+              className="w-full px-4 py-2.5 bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 rounded-lg border border-neutral-300 dark:border-neutral-700 focus:border-primary-500 dark:focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition"
+              placeholder="you@example.com"
               required
             />
           </div>
 
           <div>
-            <label className="block text-gray-300 mb-2">Password</label>
+            <label className="block text-primary-700 dark:text-neutral-300 mb-2 font-semibold text-sm">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:border-yellow-500 focus:outline-none"
+              className="w-full px-4 py-2.5 bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 rounded-lg border border-neutral-300 dark:border-neutral-700 focus:border-primary-500 dark:focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition"
+              placeholder="•••••••••"
               required
             />
           </div>
 
           <div>
-            <label className="block text-gray-300 mb-2">Confirm Password</label>
+            <label className="block text-primary-700 dark:text-neutral-300 mb-2 font-semibold text-sm">Confirm Password</label>
             <input
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:border-yellow-500 focus:outline-none"
+              className="w-full px-4 py-2.5 bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 rounded-lg border border-neutral-300 dark:border-neutral-700 focus:border-primary-500 dark:focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition"
+              placeholder="•••••••••"
               required
             />
           </div>
@@ -101,16 +112,16 @@ const Register: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-yellow-500 text-black py-2 rounded font-bold hover:bg-yellow-600 disabled:opacity-50 transition"
+            className="w-full bg-primary-600 hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700 text-white py-2.5 rounded-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed transition text-sm sm:text-base"
           >
-            {loading ? 'Registering...' : 'Register'}
+            {loading ? 'Creating Account...' : 'Create Account'}
           </button>
         </form>
 
-        <p className="text-gray-300 text-center mt-6">
+        <p className="text-neutral-600 dark:text-neutral-400 text-center mt-6 text-sm">
           Already have an account?{' '}
-          <Link to="/login" className="text-yellow-500 hover:text-yellow-600">
-            Login here
+          <Link to="/login" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold transition">
+            Sign in here
           </Link>
         </p>
       </div>

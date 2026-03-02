@@ -103,22 +103,22 @@ const AdminDashboardHome: React.FC = () => {
           {
             label: "Today's Bookings",
             value: metrics.todayBookings,
-            color: 'from-yellow-600 to-yellow-400',
+            color: 'from-primary-600 to-primary-500',
           },
           {
             label: 'Weekly Bookings',
             value: metrics.weeklyBookings,
-            color: 'from-blue-600 to-blue-400',
+            color: 'from-primary-600 to-primary-500',
           },
           {
             label: 'Monthly Revenue',
             value: `$${metrics.monthlyRevenue}`,
-            color: 'from-green-600 to-green-400',
+            color: 'from-green-600 to-green-500',
           },
           {
             label: 'Total Clients',
             value: metrics.totalClients,
-            color: 'from-purple-600 to-purple-400',
+            color: 'from-blue-600 to-blue-500',
           },
         ].map((metric, index) => (
           <motion.div
@@ -126,9 +126,9 @@ const AdminDashboardHome: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className={`bg-gradient-to-br ${metric.color} p-6 rounded-lg text-black`}
+            className={`bg-gradient-to-br ${metric.color} p-6 rounded-lg text-white dark:text-white`}
           >
-            <p className="text-sm font-semibold opacity-80">{metric.label}</p>
+            <p className="text-sm font-semibold opacity-90">{metric.label}</p>
             <p className="text-4xl font-bold mt-2">{metric.value}</p>
           </motion.div>
         ))}
@@ -139,30 +139,30 @@ const AdminDashboardHome: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="bg-gray-800 p-6 rounded-lg mb-12"
+        className="bg-white dark:bg-neutral-800 p-6 rounded-lg mb-12 border border-neutral-200 dark:border-neutral-700"
       >
-        <h2 className="text-2xl font-bold mb-6">Recent Bookings</h2>
+        <h2 className="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400">Recent Bookings</h2>
         {recentBookings.length === 0 ? (
-          <p className="text-gray-400">No recent bookings</p>
+          <p className="text-neutral-600 dark:text-neutral-400">No recent bookings</p>
         ) : (
           <div className="space-y-4">
             {recentBookings.map((booking) => (
               <div
                 key={booking._id}
-                className="bg-gray-700 p-4 rounded border border-gray-600 hover:border-yellow-500 transition"
+                className="bg-neutral-50 dark:bg-neutral-700 p-4 rounded border border-neutral-200 dark:border-neutral-700 hover:border-primary-500 dark:hover:border-primary-500 transition"
               >
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <p className="text-gray-400 text-sm">Client Name</p>
-                    <p className="font-semibold">{booking.contactInfo.name}</p>
+                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">Client Name</p>
+                    <p className="font-semibold text-neutral-900 dark:text-white">{booking.contactInfo.name}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">Package</p>
-                    <p className="font-semibold">{booking.packageId?.title || 'N/A'}</p>
+                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">Package</p>
+                    <p className="font-semibold text-neutral-900 dark:text-white">{booking.packageId?.title || 'N/A'}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">Date</p>
-                    <p className="font-semibold">
+                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">Date</p>
+                    <p className="font-semibold text-neutral-900 dark:text-white">
                       {new Date(booking.sessionDate).toLocaleDateString()}
                     </p>
                   </div>
@@ -178,40 +178,40 @@ const AdminDashboardHome: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="bg-gray-800 p-6 rounded-lg mb-12"
+        className="bg-white dark:bg-neutral-800 p-6 rounded-lg mb-12 border border-neutral-200 dark:border-neutral-700"
       >
-        <h2 className="text-2xl font-bold mb-6">Upcoming Photoshoots</h2>
+        <h2 className="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400">Upcoming Photoshoots</h2>
         {upcomingPhotoshoots.length === 0 ? (
-          <p className="text-gray-400">No upcoming photoshoots</p>
+          <p className="text-neutral-600 dark:text-neutral-400">No upcoming photoshoots</p>
         ) : (
           <div className="space-y-4">
             {upcomingPhotoshoots.map((shoot) => (
               <div
                 key={shoot._id}
-                className="bg-gray-700 p-4 rounded border border-gray-600 hover:border-green-500 transition"
+                className="bg-neutral-50 dark:bg-neutral-700 p-4 rounded border border-neutral-200 dark:border-neutral-700 hover:border-green-500 dark:hover:border-green-500 transition"
               >
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                   <div>
-                    <p className="text-gray-400 text-sm">Client</p>
-                    <p className="font-semibold">{shoot.contactInfo.name}</p>
+                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">Client</p>
+                    <p className="font-semibold text-neutral-900 dark:text-white">{shoot.contactInfo.name}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">Date & Time</p>
-                    <p className="font-semibold">
+                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">Date & Time</p>
+                    <p className="font-semibold text-neutral-900 dark:text-white">
                       {new Date(shoot.sessionDate).toLocaleString()}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">Package</p>
-                    <p className="font-semibold">{shoot.packageId?.title || 'N/A'}</p>
+                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">Package</p>
+                    <p className="font-semibold text-neutral-900 dark:text-white">{shoot.packageId?.title || 'N/A'}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">Status</p>
+                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">Status</p>
                     <span
                       className={`inline-block px-3 py-1 rounded text-sm font-semibold ${
                         shoot.status === 'Confirmed'
-                          ? 'bg-green-500/20 text-green-400'
-                          : 'bg-yellow-500/20 text-yellow-400'
+                          ? 'bg-green-500/20 text-green-600 dark:text-green-400'
+                          : 'bg-primary-600/20 text-primary-600 dark:text-primary-400'
                       }`}
                     >
                       {shoot.status}
@@ -229,13 +229,13 @@ const AdminDashboardHome: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
-        className="bg-gray-800 p-6 rounded-lg"
+        className="bg-white dark:bg-neutral-800 p-6 rounded-lg border border-neutral-200 dark:border-neutral-700"
       >
-        <h2 className="text-2xl font-bold mb-6">Manage Bookings</h2>
+        <h2 className="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400">Manage Bookings</h2>
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full text-neutral-900 dark:text-white">
             <thead>
-              <tr className="border-b border-gray-600">
+              <tr className="border-b border-neutral-300 dark:border-neutral-700">
                 <th className="text-left py-3 px-4">Client Name</th>
                 <th className="text-left py-3 px-4">Package</th>
                 <th className="text-left py-3 px-4">Date</th>
@@ -245,18 +245,18 @@ const AdminDashboardHome: React.FC = () => {
             </thead>
             <tbody>
               {allBookings.map((booking) => (
-                <tr key={booking._id} className="border-b border-gray-700 hover:bg-gray-700/50 transition">
+                <tr key={booking._id} className="border-b border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition">
                   <td className="py-3 px-4">{booking.contactInfo.name}</td>
                   <td className="py-3 px-4">{booking.packageId?.title || 'N/A'}</td>
                   <td className="py-3 px-4">
                     {new Date(booking.sessionDate).toLocaleDateString()}
                   </td>
-                  <td className="py-3 px-4 text-yellow-400 font-semibold">${booking.amount}</td>
+                  <td className="py-3 px-4 text-primary-600 dark:text-primary-400 font-semibold">${booking.amount}</td>
                   <td className="py-3 px-4">
                     <select
                       value={booking.status}
                       onChange={(e) => handleStatusUpdate(booking._id, e.target.value)}
-                      className="bg-gray-600 text-white px-3 py-1 rounded text-sm"
+                      className="bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-white px-3 py-1 rounded text-sm border border-neutral-300 dark:border-neutral-600"
                     >
                       <option value="Pending">Pending</option>
                       <option value="Confirmed">Confirmed</option>

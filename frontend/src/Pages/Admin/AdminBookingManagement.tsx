@@ -147,16 +147,16 @@ const AdminBookingManagement: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="bg-gray-800 p-6 rounded-lg"
+        className="bg-white dark:bg-neutral-800 p-6 rounded-lg border border-neutral-200 dark:border-neutral-700"
       >
         {error && (
-          <div className="bg-red-600/20 border border-red-600 text-red-200 px-4 py-3 rounded mb-4">
+          <div className="bg-red-600/20 border border-red-600 text-red-600 dark:text-red-400 px-4 py-3 rounded mb-4">
             {error}
           </div>
         )}
 
         {success && (
-          <div className="bg-green-600/20 border border-green-600 text-green-200 px-4 py-3 rounded mb-4">
+          <div className="bg-green-600/20 border border-green-600 text-green-600 dark:text-green-400 px-4 py-3 rounded mb-4">
             {success}
           </div>
         )}
@@ -166,8 +166,8 @@ const AdminBookingManagement: React.FC = () => {
             onClick={() => setStatusFilter('All')}
             className={`px-4 py-2 rounded font-semibold transition ${
               statusFilter === 'All'
-                ? 'bg-yellow-500 text-black'
-                : 'bg-gray-700 text-white hover:bg-gray-600'
+                ? 'bg-primary-600 text-white dark:bg-primary-600'
+                : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-white hover:bg-neutral-300 dark:hover:bg-neutral-600'
             }`}
           >
             All ({stats.total})
@@ -176,8 +176,8 @@ const AdminBookingManagement: React.FC = () => {
             onClick={() => setStatusFilter('Pending')}
             className={`px-4 py-2 rounded font-semibold transition ${
               statusFilter === 'Pending'
-                ? 'bg-yellow-500 text-black'
-                : 'bg-gray-700 text-white hover:bg-gray-600'
+                ? 'bg-primary-600 text-white dark:bg-primary-600'
+                : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-white hover:bg-neutral-300 dark:hover:bg-neutral-600'
             }`}
           >
             Pending ({stats.pending})
@@ -186,8 +186,8 @@ const AdminBookingManagement: React.FC = () => {
             onClick={() => setStatusFilter('Confirmed')}
             className={`px-4 py-2 rounded font-semibold transition ${
               statusFilter === 'Confirmed'
-                ? 'bg-green-500 text-black'
-                : 'bg-gray-700 text-white hover:bg-gray-600'
+                ? 'bg-green-600 text-white'
+                : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-white hover:bg-neutral-300 dark:hover:bg-neutral-600'
             }`}
           >
             Confirmed ({stats.confirmed})
@@ -196,8 +196,8 @@ const AdminBookingManagement: React.FC = () => {
             onClick={() => setStatusFilter('Completed')}
             className={`px-4 py-2 rounded font-semibold transition ${
               statusFilter === 'Completed'
-                ? 'bg-purple-500 text-black'
-                : 'bg-gray-700 text-white hover:bg-gray-600'
+                ? 'bg-blue-600 text-white'
+                : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-white hover:bg-neutral-300 dark:hover:bg-neutral-600'
             }`}
           >
             Completed ({stats.completed})
@@ -212,10 +212,10 @@ const AdminBookingManagement: React.FC = () => {
         transition={{ delay: 0.2 }}
         className="space-y-4"
       >
-        <h2 className="text-2xl font-bold">Booking Details</h2>
+        <h2 className="text-2xl font-bold text-primary-700 dark:text-primary-400">Booking Details</h2>
 
         {filteredBookings.length === 0 ? (
-          <div className="bg-gray-800 p-8 rounded text-center text-gray-400">
+          <div className="bg-white dark:bg-neutral-800 p-8 rounded text-center text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700">
             No bookings found
           </div>
         ) : (
@@ -225,19 +225,19 @@ const AdminBookingManagement: React.FC = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.05 }}
-              className="bg-gray-800 p-6 rounded-lg border border-gray-700 hover:border-yellow-500 transition"
+              className="bg-white dark:bg-neutral-800 p-6 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-500 dark:hover:border-primary-500 transition"
             >
               {/* Progress Bar */}
               <div className="mb-4">
                 <div className="flex justify-between text-sm mb-2">
-                  <span className="text-gray-400">Booking Progress</span>
+                  <span className="text-neutral-600 dark:text-neutral-400">Booking Progress</span>
                   <span className={`font-semibold border px-2 py-1 rounded ${getStatusColor(booking.status)}`}>
                     {booking.status}
                   </span>
                 </div>
-                <div className="w-full bg-gray-700 rounded-full h-2">
+                <div className="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-2">
                   <div
-                    className="bg-gradient-to-r from-yellow-500 to-yellow-600 h-2 rounded-full transition-all"
+                    className="bg-gradient-to-r from-primary-600 to-primary-700 h-2 rounded-full transition-all"
                     style={{ width: `${getProgressPercentage(booking.status)}%` }}
                   />
                 </div>
@@ -247,34 +247,34 @@ const AdminBookingManagement: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
                 {/* Client Info */}
                 <div>
-                  <h3 className="text-lg font-bold mb-2">Client Information</h3>
-                  <div className="space-y-1 text-sm">
+                  <h3 className="text-lg font-bold mb-2 text-neutral-900 dark:text-white">Client Information</h3>
+                  <div className="space-y-1 text-sm text-neutral-700 dark:text-neutral-300">
                     <p>
-                      <span className="text-gray-400">Name:</span> {booking.contactInfo.name}
+                      <span className="text-neutral-600 dark:text-neutral-400">Name:</span> {booking.contactInfo.name}
                     </p>
                     <p>
-                      <span className="text-gray-400">Email:</span> {booking.contactInfo.email}
+                      <span className="text-neutral-600 dark:text-neutral-400">Email:</span> {booking.contactInfo.email}
                     </p>
                     <p>
-                      <span className="text-gray-400">Phone:</span> {booking.contactInfo.phone}
+                      <span className="text-neutral-600 dark:text-neutral-400">Phone:</span> {booking.contactInfo.phone}
                     </p>
                   </div>
                 </div>
 
                 {/* Booking Info */}
                 <div>
-                  <h3 className="text-lg font-bold mb-2">Booking Information</h3>
-                  <div className="space-y-1 text-sm">
+                  <h3 className="text-lg font-bold mb-2 text-neutral-900 dark:text-white">Booking Information</h3>
+                  <div className="space-y-1 text-sm text-neutral-700 dark:text-neutral-300">
                     <p>
-                      <span className="text-gray-400">Package:</span>{' '}
+                      <span className="text-neutral-600 dark:text-neutral-400">Package:</span>{' '}
                       {booking.packageId?.title || 'N/A'}
                     </p>
                     <p>
-                      <span className="text-gray-400">Session Date:</span>{' '}
+                      <span className="text-neutral-600 dark:text-neutral-400">Session Date:</span>{' '}
                       {new Date(booking.sessionDate).toLocaleString()}
                     </p>
                     <p>
-                      <span className="text-gray-400">Booked On:</span>{' '}
+                      <span className="text-neutral-600 dark:text-neutral-400">Booked On:</span>{' '}
                       {new Date(booking.createdAt).toLocaleDateString()}
                     </p>
                   </div>
@@ -282,11 +282,11 @@ const AdminBookingManagement: React.FC = () => {
 
                 {/* Payment Info */}
                 <div>
-                  <h3 className="text-lg font-bold mb-2">Payment Information</h3>
+                  <h3 className="text-lg font-bold mb-2 text-neutral-900 dark:text-white">Payment Information</h3>
                   <div className="space-y-1 text-sm">
-                    <p className="text-2xl font-bold text-yellow-400">${booking.amount}</p>
-                    <p className="text-gray-400">Payment Pending</p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">${booking.amount}</p>
+                    <p className="text-neutral-600 dark:text-neutral-400">Payment Pending</p>
+                    <p className="text-xs text-neutral-500 dark:text-neutral-500">
                       ID: {booking._id.substring(0, 8)}...
                     </p>
                   </div>
@@ -294,11 +294,11 @@ const AdminBookingManagement: React.FC = () => {
               </div>
 
               {/* Status Update & Actions */}
-              <div className="border-t border-gray-700 pt-4 flex flex-wrap gap-2">
+              <div className="border-t border-neutral-200 dark:border-neutral-700 pt-4 flex flex-wrap gap-2">
                 <select
                   value={booking.status}
                   onChange={(e) => handleStatusChange(booking._id, e.target.value)}
-                  className="flex-1 min-w-[150px] bg-gray-700 text-white px-3 py-2 rounded text-sm border border-gray-600 focus:border-yellow-500 focus:outline-none"
+                  className="flex-1 min-w-[150px] bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-white px-3 py-2 rounded text-sm border border-neutral-300 dark:border-neutral-600 focus:border-primary-500 dark:focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
                 >
                   <option value="Pending">Pending</option>
                   <option value="Confirmed">Confirmed</option>
@@ -308,7 +308,7 @@ const AdminBookingManagement: React.FC = () => {
                 </select>
                 <button
                   onClick={() => handleDelete(booking._id)}
-                  className="bg-red-600/20 text-red-400 hover:bg-red-600/40 px-4 py-2 rounded text-sm transition"
+                  className="bg-red-600/20 text-red-600 dark:text-red-400 hover:bg-red-600/40 px-4 py-2 rounded text-sm transition"
                 >
                   Delete Booking
                 </button>

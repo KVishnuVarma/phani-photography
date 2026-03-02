@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { getUserBookings } from "../../api";
+import ThemeToggle from "../../Components/ThemeToggle";
 
 interface Booking {
   _id: string;
@@ -45,36 +46,37 @@ const UserDashboard: React.FC = () => {
   };
 
   return (
-    <div className="w-full font-sans text-white bg-black overflow-x-hidden">
+    <div className="w-full font-sans text-neutral-900 dark:text-white bg-neutral-50 dark:bg-neutral-950 overflow-x-hidden">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800">
+      <nav className="fixed top-0 w-full z-50 bg-neutral-50/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Photography Studio</h1>
-          <div className="flex gap-6">
+          <h1 className="text-2xl font-bold text-primary-700 dark:text-primary-400">Photography Studio</h1>
+          <div className="flex gap-6 items-center">
             <button
               onClick={() => navigate("/")}
-              className="hover:text-yellow-400 transition"
+              className="hover:text-primary-600 dark:hover:text-primary-400 transition"
             >
               Home
             </button>
             <button
               onClick={() => navigate("/gallery")}
-              className="hover:text-yellow-400 transition"
+              className="hover:text-primary-600 dark:hover:text-primary-400 transition"
             >
               Gallery
             </button>
             <button
               onClick={() => navigate("/packages")}
-              className="hover:text-yellow-400 transition"
+              className="hover:text-primary-600 dark:hover:text-primary-400 transition"
             >
               Packages
             </button>
             <button
               onClick={handleLogout}
-              className="bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-600 transition"
+              className="bg-primary-600 text-white px-6 py-2 rounded hover:bg-primary-700 transition"
             >
               Logout
             </button>
+            <ThemeToggle />
           </div>
         </div>
       </nav>
@@ -95,7 +97,7 @@ const UserDashboard: React.FC = () => {
           className="relative z-20 h-full flex flex-col items-center justify-center text-center px-4"
         >
           <motion.h1
-            className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight drop-shadow-xl"
+            className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight drop-shadow-xl text-white"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
@@ -103,7 +105,7 @@ const UserDashboard: React.FC = () => {
             Welcome, {user?.username}!
           </motion.h1>
           <motion.p
-            className="text-lg md:text-xl text-gray-300 max-w-2xl"
+            className="text-lg md:text-xl text-neutral-200 max-w-2xl"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 1 }}
@@ -114,35 +116,35 @@ const UserDashboard: React.FC = () => {
       </section>
 
       {/* User Info Section */}
-      <section className="bg-gray-800 px-6 md:px-16 py-12">
+      <section className="bg-neutral-100 dark:bg-neutral-900 px-6 md:px-16 py-12">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6">Profile Information</h2>
+          <h2 className="text-3xl font-bold mb-6 text-primary-700 dark:text-primary-400">Profile Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-gray-700 p-6 rounded">
-              <p className="text-gray-300 text-sm">Username</p>
-              <p className="text-2xl font-bold">{user?.username}</p>
+            <div className="bg-white dark:bg-neutral-800 p-6 rounded border border-neutral-200 dark:border-neutral-700">
+              <p className="text-neutral-600 dark:text-neutral-400 text-sm">Username</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{user?.username}</p>
             </div>
-            <div className="bg-gray-700 p-6 rounded">
-              <p className="text-gray-300 text-sm">Email</p>
-              <p className="text-2xl font-bold">{user?.email}</p>
+            <div className="bg-white dark:bg-neutral-800 p-6 rounded border border-neutral-200 dark:border-neutral-700">
+              <p className="text-neutral-600 dark:text-neutral-400 text-sm">Email</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{user?.email}</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Bookings Section */}
-      <section className="bg-black px-6 md:px-16 py-16">
+      <section className="bg-neutral-50 dark:bg-neutral-950 px-6 md:px-16 py-16">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6">Your Bookings</h2>
+          <h2 className="text-3xl font-bold mb-6 text-primary-700 dark:text-primary-400">Your Bookings</h2>
 
           {loading ? (
-            <div className="text-gray-300 text-center py-8">Loading bookings...</div>
+            <div className="text-neutral-600 dark:text-neutral-400 text-center py-8">Loading bookings...</div>
           ) : bookings.length === 0 ? (
-            <div className="bg-gray-800 p-8 rounded text-center">
-              <p className="text-gray-300 mb-4">No bookings yet</p>
+            <div className="bg-neutral-100 dark:bg-neutral-800 p-8 rounded text-center border border-neutral-200 dark:border-neutral-700">
+              <p className="text-neutral-600 dark:text-neutral-400 mb-4">No bookings yet</p>
               <button
                 onClick={() => navigate("/packages")}
-                className="bg-yellow-500 text-black px-6 py-2 rounded font-bold hover:bg-yellow-600 transition"
+                className="bg-primary-600 text-white px-6 py-2 rounded font-bold hover:bg-primary-700 transition"
               >
                 Browse Packages
               </button>
@@ -154,38 +156,38 @@ const UserDashboard: React.FC = () => {
                   key={booking._id}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-gray-800 p-6 rounded-lg border border-gray-700 hover:border-yellow-500 transition"
+                  className="bg-white dark:bg-neutral-800 p-6 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-500 dark:hover:border-primary-500 transition"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div>
-                      <p className="text-gray-400 text-sm">Package</p>
-                      <p className="text-lg font-semibold">
+                      <p className="text-neutral-600 dark:text-neutral-400 text-sm">Package</p>
+                      <p className="text-lg font-semibold text-neutral-900 dark:text-white">
                         {booking.packageId?.title || "Package"}
                       </p>
                     </div>
                     <div>
-                      <p className="text-gray-400 text-sm">Session Date</p>
-                      <p className="text-lg font-semibold">
+                      <p className="text-neutral-600 dark:text-neutral-400 text-sm">Session Date</p>
+                      <p className="text-lg font-semibold text-neutral-900 dark:text-white">
                         {new Date(booking.sessionDate).toLocaleDateString()}
                       </p>
                     </div>
                     <div>
-                      <p className="text-gray-400 text-sm">Price</p>
-                      <p className="text-lg font-semibold text-yellow-400">
+                      <p className="text-neutral-600 dark:text-neutral-400 text-sm">Price</p>
+                      <p className="text-lg font-semibold text-primary-600 dark:text-primary-400">
                         ${booking.amount}
                       </p>
                     </div>
                     <div>
-                      <p className="text-gray-400 text-sm">Status</p>
+                      <p className="text-neutral-600 dark:text-neutral-400 text-sm">Status</p>
                       <p
                         className={`text-lg font-semibold ${
                           booking.status === "Confirmed"
-                            ? "text-green-400"
+                            ? "text-green-500 dark:text-green-400"
                             : booking.status === "Completed"
-                            ? "text-blue-400"
+                            ? "text-primary-600 dark:text-primary-400"
                             : booking.status === "Cancelled"
-                            ? "text-red-400"
-                            : "text-yellow-400"
+                            ? "text-red-500 dark:text-red-400"
+                            : "text-primary-600 dark:text-primary-400"
                         }`}
                       >
                         {booking.status}
@@ -200,26 +202,26 @@ const UserDashboard: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gray-800 px-6 md:px-16 py-16 text-center">
+      <section className="bg-neutral-100 dark:bg-neutral-900 px-6 md:px-16 py-16 text-center border-t border-neutral-200 dark:border-neutral-800">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold mb-4">Ready for More?</h2>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold mb-4 text-primary-700 dark:text-primary-400">Ready for More?</h2>
+          <p className="text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl mx-auto">
             Explore our gallery and book your next photography session
           </p>
           <div className="flex gap-4 justify-center">
             <button
               onClick={() => navigate("/gallery")}
-              className="bg-gray-700 text-white px-6 py-3 rounded hover:bg-gray-600 transition"
+              className="bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-white px-6 py-3 rounded hover:bg-neutral-300 dark:hover:bg-neutral-700 transition border border-neutral-300 dark:border-neutral-700"
             >
               View Gallery
             </button>
             <button
               onClick={() => navigate("/packages")}
-              className="bg-yellow-500 text-black px-6 py-3 rounded font-bold hover:bg-yellow-600 transition"
+              className="bg-primary-600 text-white px-6 py-3 rounded font-bold hover:bg-primary-700 transition"
             >
               Book Now
             </button>

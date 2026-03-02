@@ -1,48 +1,56 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import ThemeToggle from '../Components/ThemeToggle';
 
 const HomePage: React.FC = () => {
   return (
-    <div className="w-full bg-black text-white min-h-screen">
+    <div className="w-full min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Photography Studio</h1>
-          <div className="flex gap-6">
-            <Link to="/gallery" className="hover:text-yellow-400 transition">
+      <nav className="fixed top-0 w-full z-50 bg-neutral-50/95 dark:bg-neutral-950/95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-4 flex justify-between items-center">
+          <h1 className="text-xl sm:text-2xl font-bold text-primary-700 dark:text-primary-400">Photography Studio</h1>
+          <div className="flex gap-3 sm:gap-6 items-center">
+            <Link to="/gallery" className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition">
               Gallery
             </Link>
-            <Link to="/packages" className="hover:text-yellow-400 transition">
+            <Link to="/packages" className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition">
               Packages
             </Link>
             <Link
+              to="/contact"
+              className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition"
+            >
+              Contact
+            </Link>
+            <Link
               to="/login"
-              className="bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-600 transition"
+              className="bg-primary-600 hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold transition text-sm sm:text-base"
             >
               Login
             </Link>
+            <ThemeToggle />
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative h-screen w-full overflow-hidden pt-16">
+      <section className="relative min-h-screen w-full overflow-hidden pt-16 flex items-center">
         <div
-          className="absolute inset-0 bg-cover bg-center brightness-30 z-0"
+          className="absolute inset-0 bg-cover bg-center dark:brightness-20 brightness-40 z-0"
           style={{ backgroundImage: "url('/phani.jpg')" }}
         />
-        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
+        <div className="relative z-10 w-full flex flex-col items-center justify-center text-center px-4 py-16 sm:py-24">
           <motion.h1
-            className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight drop-shadow-2xl"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4 sm:mb-6 leading-tight drop-shadow-2xl text-white"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            Capture Magic, <span className="text-yellow-400">Make It Last</span> Forever
+            Capture Magic, <span className="text-primary-300">Make It Last</span> Forever
           </motion.h1>
           <motion.p
-            className="text-xl md:text-2xl text-gray-300 max-w-3xl mb-12"
+            className="text-lg sm:text-xl md:text-2xl text-gray-100 max-w-2xl sm:max-w-3xl mb-8 sm:mb-12 drop-shadow-lg"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 1 }}
@@ -50,20 +58,20 @@ const HomePage: React.FC = () => {
             Cinematic wedding stories, timeless moments, and vibrant portraits
           </motion.p>
           <motion.div
-            className="flex flex-col md:flex-row gap-6"
+            className="flex flex-col sm:flex-row gap-4 sm:gap-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 1 }}
           >
             <Link
               to="/packages"
-              className="bg-yellow-500 text-black px-8 py-3 rounded font-bold hover:bg-yellow-600 transition text-lg"
+              className="bg-primary-600 hover:bg-primary-700 text-white px-6 sm:px-8 py-3 rounded-lg font-bold transition text-base sm:text-lg w-full sm:w-auto text-center"
             >
               Book a Session
             </Link>
             <Link
               to="/gallery"
-              className="border-2 border-white text-white px-8 py-3 rounded font-bold hover:bg-white hover:text-black transition text-lg"
+              className="border-2 border-white text-white hover:bg-white hover:text-neutral-900 px-6 sm:px-8 py-3 rounded-lg font-bold transition text-base sm:text-lg w-full sm:w-auto text-center"
             >
               Explore Gallery
             </Link>
@@ -73,19 +81,19 @@ const HomePage: React.FC = () => {
 
       {/* Services Section */}
       <motion.section
-        className="bg-white text-black px-6 md:px-16 py-24"
+        className="bg-neutral-50 dark:bg-neutral-900 px-4 sm:px-6 md:px-8 py-16 sm:py-24"
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true, amount: 0.3 }}
       >
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-bold mb-4 text-center">Our Signature Services</h2>
-          <p className="text-center text-gray-700 mb-16 max-w-3xl mx-auto text-lg">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-3 sm:mb-4 text-center text-primary-700 dark:text-primary-400">Our Signature Services</h2>
+          <p className="text-center text-neutral-600 dark:text-neutral-400 mb-12 sm:mb-16 max-w-2xl sm:max-w-3xl mx-auto text-base sm:text-lg">
             From traditional weddings to cinematic outdoor shoots, we craft each frame with heart.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
                 title: 'Wedding Photography',
@@ -105,18 +113,18 @@ const HomePage: React.FC = () => {
             ].map((service, index) => (
               <motion.div
                 key={index}
-                className="bg-gray-100 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition"
+                className="bg-white dark:bg-neutral-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl dark:hover:shadow-2xl hover:-translate-y-2 transition"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className="h-40 bg-gradient-to-br from-yellow-400 to-orange-400 flex items-center justify-center">
-                  <span className="text-6xl">{service.icon}</span>
+                <div className="h-32 sm:h-40 bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
+                  <span className="text-5xl sm:text-6xl">{service.icon}</span>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
-                  <p className="text-gray-700">{service.description}</p>
+                <div className="p-4 sm:p-6">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-primary-700 dark:text-primary-400">{service.title}</h3>
+                  <p className="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">{service.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -126,16 +134,16 @@ const HomePage: React.FC = () => {
 
       {/* Why Choose Us */}
       <motion.section
-        className="bg-black text-white px-6 md:px-16 py-24"
+        className="bg-primary-700 dark:bg-neutral-950 text-neutral-50 px-4 sm:px-6 md:px-8 py-16 sm:py-24"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-bold mb-16 text-center">Why Choose Us?</h2>
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-12 sm:mb-16 text-center">Why Choose Us?</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12">
             {[
               {
                 title: 'Professional Team',
@@ -156,16 +164,16 @@ const HomePage: React.FC = () => {
             ].map((item, index) => (
               <motion.div
                 key={index}
-                className="flex gap-6"
+                className="flex gap-4 sm:gap-6"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl">✓</div>
+                <div className="text-3xl sm:text-4xl text-primary-300 flex-shrink-0">✓</div>
                 <div>
-                  <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
-                  <p className="text-gray-400">{item.description}</p>
+                  <h3 className="text-lg sm:text-2xl font-bold mb-1 sm:mb-2">{item.title}</h3>
+                  <p className="text-neutral-200 text-sm sm:text-base">{item.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -175,18 +183,18 @@ const HomePage: React.FC = () => {
 
       {/* CTA Section */}
       <motion.section
-        className="bg-yellow-500 text-black px-6 md:px-16 py-24 text-center"
+        className="bg-primary-600 dark:bg-primary-700 text-white px-4 sm:px-6 md:px-8 py-16 sm:py-24 text-center"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-5xl font-bold mb-6">Ready to Capture Your Moment?</h2>
-          <p className="text-xl mb-8">Browse our packages and book your session today</p>
+        <div className="max-w-2xl sm:max-w-3xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4 sm:mb-6">Ready to Capture Your Moment?</h2>
+          <p className="text-base sm:text-xl mb-6 sm:mb-8">Browse our packages and book your session today</p>
           <Link
             to="/packages"
-            className="inline-block bg-black text-yellow-400 px-8 py-4 rounded font-bold text-lg hover:bg-gray-900 transition"
+            className="inline-block bg-white hover:bg-neutral-100 text-primary-700 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg transition"
           >
             Get Started
           </Link>
@@ -194,9 +202,9 @@ const HomePage: React.FC = () => {
       </motion.section>
 
       {/* Footer */}
-      <footer className="bg-black text-gray-400 px-6 md:px-16 py-12 border-t border-gray-800">
-        <div className="max-w-7xl mx-auto text-center">
-          <p>&copy; 2024 Photography Studio. All rights reserved.</p>
+      <footer className="bg-primary-700 dark:bg-neutral-950 text-neutral-700 dark:text-neutral-600 px-4 sm:px-6 md:px-8 py-8 sm:py-12 border-t border-neutral-700 dark:border-neutral-800">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-sm sm:text-base">&copy; 2024 Photography Studio. All rights reserved.</p>
         </div>
       </footer>
     </div>

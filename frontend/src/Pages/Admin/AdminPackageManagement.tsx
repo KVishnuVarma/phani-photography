@@ -134,44 +134,44 @@ const AdminPackageManagement: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gray-800 p-8 rounded-lg"
+        className="bg-white dark:bg-neutral-800 p-8 rounded-lg border border-neutral-200 dark:border-neutral-700"
       >
-        <h2 className="text-2xl font-bold mb-6">
+        <h2 className="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400">
           {editingId ? 'Edit Package' : 'Create New Package'}
         </h2>
 
         {error && (
-          <div className="bg-red-600/20 border border-red-600 text-red-200 px-4 py-3 rounded mb-4">
+          <div className="bg-red-600/20 border border-red-600 text-red-600 dark:text-red-400 px-4 py-3 rounded mb-4">
             {error}
           </div>
         )}
 
         {success && (
-          <div className="bg-green-600/20 border border-green-600 text-green-200 px-4 py-3 rounded mb-4">
+          <div className="bg-green-600/20 border border-green-600 text-green-600 dark:text-green-400 px-4 py-3 rounded mb-4">
             {success}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-gray-300 mb-2">Title *</label>
+            <label className="block text-primary-700 dark:text-neutral-300 mb-2 font-semibold">Title *</label>
             <input
               type="text"
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:border-yellow-500 focus:outline-none"
+              className="w-full px-4 py-2 bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded border border-neutral-300 dark:border-neutral-600 focus:border-primary-500 dark:focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
               required
             />
           </div>
 
           <div>
-            <label className="block text-gray-300 mb-2">Category *</label>
+            <label className="block text-primary-700 dark:text-neutral-300 mb-2 font-semibold">Category *</label>
             <select
               value={formData.category}
               onChange={(e) =>
                 setFormData({ ...formData, category: e.target.value as any })
               }
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:border-yellow-500 focus:outline-none"
+              className="w-full px-4 py-2 bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded border border-neutral-300 dark:border-neutral-600 focus:border-primary-500 dark:focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
             >
               <option value="Wedding">Wedding</option>
               <option value="Birthday">Birthday</option>
@@ -180,60 +180,60 @@ const AdminPackageManagement: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-gray-300 mb-2">Price ($) *</label>
+            <label className="block text-primary-700 dark:text-neutral-300 mb-2 font-semibold">Price ($) *</label>
             <input
               type="number"
               value={formData.price}
               onChange={(e) => setFormData({ ...formData, price: parseFloat(e.target.value) })}
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:border-yellow-500 focus:outline-none"
+              className="w-full px-4 py-2 bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded border border-neutral-300 dark:border-neutral-600 focus:border-primary-500 dark:focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
               required
             />
           </div>
 
           <div>
-            <label className="block text-gray-300 mb-2">Photos Included *</label>
+            <label className="block text-primary-700 dark:text-neutral-300 mb-2 font-semibold">Photos Included *</label>
             <input
               type="number"
               value={formData.photosIncluded}
               onChange={(e) =>
                 setFormData({ ...formData, photosIncluded: parseInt(e.target.value) })
               }
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:border-yellow-500 focus:outline-none"
+              className="w-full px-4 py-2 bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded border border-neutral-300 dark:border-neutral-600 focus:border-primary-500 dark:focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
               required
             />
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-gray-300 mb-2">Description *</label>
+            <label className="block text-primary-700 dark:text-neutral-300 mb-2 font-semibold">Description *</label>
             <textarea
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               rows={3}
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:border-yellow-500 focus:outline-none"
+              className="w-full px-4 py-2 bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded border border-neutral-300 dark:border-neutral-600 focus:border-primary-500 dark:focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
               required
             />
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-gray-300 mb-2">Features (comma-separated) *</label>
+            <label className="block text-primary-700 dark:text-neutral-300 mb-2 font-semibold">Features (comma-separated) *</label>
             <textarea
               value={formData.features}
               onChange={(e) => setFormData({ ...formData, features: e.target.value })}
               placeholder="Full day coverage, Professional editing, Online gallery"
               rows={3}
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:border-yellow-500 focus:outline-none"
+              className="w-full px-4 py-2 bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded border border-neutral-300 dark:border-neutral-600 focus:border-primary-500 dark:focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
               required
             />
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-gray-300 mb-2">Thumbnail URL</label>
+            <label className="block text-primary-700 dark:text-neutral-300 mb-2 font-semibold">Thumbnail URL</label>
             <input
               type="url"
               value={formData.thumbnailUrl}
               onChange={(e) => setFormData({ ...formData, thumbnailUrl: e.target.value })}
               placeholder="https://example.com/image.jpg"
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:border-yellow-500 focus:outline-none"
+              className="w-full px-4 py-2 bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded border border-neutral-300 dark:border-neutral-600 focus:border-primary-500 dark:focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
             />
           </div>
 
@@ -241,7 +241,7 @@ const AdminPackageManagement: React.FC = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="flex-1 bg-yellow-500 text-black px-6 py-2 rounded font-bold hover:bg-yellow-600 disabled:opacity-50 transition"
+              className="flex-1 bg-primary-600 text-white px-6 py-2 rounded font-bold hover:bg-primary-700 dark:hover:bg-primary-700 disabled:opacity-50 transition"
             >
               {submitting ? 'Saving...' : editingId ? 'Update Package' : 'Create Package'}
             </button>
@@ -249,7 +249,7 @@ const AdminPackageManagement: React.FC = () => {
               <button
                 type="button"
                 onClick={resetForm}
-                className="flex-1 bg-gray-700 text-white px-6 py-2 rounded font-bold hover:bg-gray-600 transition"
+                className="flex-1 bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-white px-6 py-2 rounded font-bold hover:bg-neutral-300 dark:hover:bg-neutral-600 transition"
               >
                 Cancel
               </button>
@@ -263,14 +263,14 @@ const AdminPackageManagement: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="bg-gray-800 p-8 rounded-lg"
+        className="bg-white dark:bg-neutral-800 p-8 rounded-lg border border-neutral-200 dark:border-neutral-700"
       >
-        <h2 className="text-2xl font-bold mb-6">All Packages ({packages.length})</h2>
+        <h2 className="text-2xl font-bold mb-6 text-primary-700 dark:text-primary-400">All Packages ({packages.length})</h2>
 
         {loading ? (
-          <p className="text-gray-400">Loading packages...</p>
+          <p className="text-neutral-600 dark:text-neutral-400">Loading packages...</p>
         ) : packages.length === 0 ? (
-          <p className="text-gray-400 text-center py-8">No packages created yet</p>
+          <p className="text-neutral-600 dark:text-neutral-400 text-center py-8">No packages created yet</p>
         ) : (
           <div className="space-y-4">
             {packages.map((pkg) => (
@@ -278,33 +278,33 @@ const AdminPackageManagement: React.FC = () => {
                 key={pkg._id}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="bg-gray-700 p-6 rounded-lg border border-gray-600 hover:border-yellow-500 transition"
+                className="bg-neutral-50 dark:bg-neutral-700 p-6 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-500 dark:hover:border-primary-500 transition"
               >
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
                   <div>
-                    <p className="text-sm text-gray-400">Title</p>
-                    <p className="font-bold text-lg">{pkg.title}</p>
-                    <p className="text-xs text-yellow-400">{pkg.category}</p>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">Title</p>
+                    <p className="font-bold text-lg text-neutral-900 dark:text-white">{pkg.title}</p>
+                    <p className="text-xs text-primary-600 dark:text-primary-400">{pkg.category}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-400">Price & Photos</p>
-                    <p className="font-bold">${pkg.price}</p>
-                    <p className="text-xs text-gray-400">{pkg.photosIncluded} photos</p>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">Price & Photos</p>
+                    <p className="font-bold text-neutral-900 dark:text-white">${pkg.price}</p>
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400">{pkg.photosIncluded} photos</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-400">Description</p>
-                    <p className="text-sm line-clamp-2">{pkg.description}</p>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">Description</p>
+                    <p className="text-sm line-clamp-2 text-neutral-900 dark:text-neutral-300">{pkg.description}</p>
                   </div>
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleEdit(pkg)}
-                      className="flex-1 bg-blue-600/20 text-blue-400 hover:bg-blue-600/40 px-3 py-2 rounded text-sm transition"
+                      className="flex-1 bg-primary-600/20 text-primary-600 dark:text-primary-400 hover:bg-primary-600/40 px-3 py-2 rounded text-sm transition"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(pkg._id)}
-                      className="flex-1 bg-red-600/20 text-red-400 hover:bg-red-600/40 px-3 py-2 rounded text-sm transition"
+                      className="flex-1 bg-red-600/20 text-red-600 dark:text-red-400 hover:bg-red-600/40 px-3 py-2 rounded text-sm transition"
                     >
                       Delete
                     </button>
