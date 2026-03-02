@@ -1,5 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handleResponse = async (response: Response): Promise<any> => {
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
@@ -10,7 +9,7 @@ const handleResponse = async (response: Response): Promise<any> => {
 
 // Auth endpoints
 export const registerUser = async (username: string, email: string, password: string) => {
-  const response = await fetch(`${API_BASE_URL}/auth/register`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, email, password }),
@@ -19,7 +18,7 @@ export const registerUser = async (username: string, email: string, password: st
 };
 
 export const loginUser = async (email: string, password: string) => {
-  const response = await fetch(`${API_BASE_URL}/auth/login`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
@@ -28,7 +27,7 @@ export const loginUser = async (email: string, password: string) => {
 };
 
 export const getUserProfile = async (userId: string, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/auth/${userId}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/${userId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -38,17 +37,18 @@ export const getUserProfile = async (userId: string, token: string) => {
 
 // Package endpoints
 export const getAllPackages = async () => {
-  const response = await fetch(`${API_BASE_URL}/packages`);
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/packages`);
   return handleResponse(response);
 };
 
 export const getPackageById = async (packageId: string) => {
-  const response = await fetch(`${API_BASE_URL}/packages/${packageId}`);
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/packages/${packageId}`);
   return handleResponse(response);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createPackage = async (packageData: any, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/packages`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/packages`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -59,8 +59,9 @@ export const createPackage = async (packageData: any, token: string) => {
   return handleResponse(response);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const updatePackage = async (packageId: string, packageData: any, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/packages/${packageId}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/packages/${packageId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -72,7 +73,7 @@ export const updatePackage = async (packageId: string, packageData: any, token: 
 };
 
 export const deletePackage = async (packageId: string, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/packages/${packageId}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/packages/${packageId}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -82,8 +83,9 @@ export const deletePackage = async (packageId: string, token: string) => {
 };
 
 // Booking endpoints
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createBooking = async (bookingData: any, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/bookings`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/bookings`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -95,7 +97,7 @@ export const createBooking = async (bookingData: any, token: string) => {
 };
 
 export const getBookings = async (token: string) => {
-  const response = await fetch(`${API_BASE_URL}/bookings`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/bookings`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -104,7 +106,7 @@ export const getBookings = async (token: string) => {
 };
 
 export const getUserBookings = async (userId: string, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/bookings/user/${userId}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/bookings/user/${userId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -113,7 +115,7 @@ export const getUserBookings = async (userId: string, token: string) => {
 };
 
 export const getBookingById = async (bookingId: string, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/bookings/${bookingId}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/bookings/${bookingId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -122,7 +124,7 @@ export const getBookingById = async (bookingId: string, token: string) => {
 };
 
 export const updateBookingStatus = async (bookingId: string, status: string, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/bookings/${bookingId}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/bookings/${bookingId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -134,7 +136,7 @@ export const updateBookingStatus = async (bookingId: string, status: string, tok
 };
 
 export const deleteBooking = async (bookingId: string, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/bookings/${bookingId}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/bookings/${bookingId}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -145,7 +147,7 @@ export const deleteBooking = async (bookingId: string, token: string) => {
 
 // Gallery endpoints
 export const uploadImage = async (imageUrl: string, caption: string, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/gallery/post`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/gallery/post`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -157,12 +159,12 @@ export const uploadImage = async (imageUrl: string, caption: string, token: stri
 };
 
 export const getGalleryImages = async () => {
-  const response = await fetch(`${API_BASE_URL}/gallery/get`);
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/gallery/get`);
   return handleResponse(response);
 };
 
 export const deleteImage = async (imageId: string, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/gallery/delete/${imageId}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/gallery/delete/${imageId}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -173,12 +175,12 @@ export const deleteImage = async (imageId: string, token: string) => {
 
 // Works endpoints
 export const getWorks = async () => {
-  const response = await fetch(`${API_BASE_URL}/works/all`);
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/works/all`);
   return handleResponse(response);
 };
 
 export const addWork = async (formData: FormData, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/works/add`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/works/add`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -190,7 +192,7 @@ export const addWork = async (formData: FormData, token: string) => {
 
 // Dashboard endpoints
 export const getDashboardMetrics = async (token: string) => {
-  const response = await fetch(`${API_BASE_URL}/dashboard/metrics`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/dashboard/metrics`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -199,7 +201,7 @@ export const getDashboardMetrics = async (token: string) => {
 };
 
 export const getRecentBookings = async (token: string) => {
-  const response = await fetch(`${API_BASE_URL}/dashboard/recent-bookings`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/dashboard/recent-bookings`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -208,7 +210,7 @@ export const getRecentBookings = async (token: string) => {
 };
 
 export const getUpcomingPhotoshoots = async (token: string) => {
-  const response = await fetch(`${API_BASE_URL}/dashboard/upcoming-photoshoots`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/dashboard/upcoming-photoshoots`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -217,27 +219,32 @@ export const getUpcomingPhotoshoots = async (token: string) => {
 };
 
 // Legacy endpoints (kept for compatibility)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getServices = async (): Promise<any[]> => {
-  const response = await fetch(`${API_BASE_URL}/packages`);
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/packages`);
   return handleResponse(response);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getTestimonials = async (): Promise<any[]> => {
   // This would need a testimonials endpoint or can be mocked
   return [];
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
 export const submitContactForm = async (_formData: any): Promise<void> => {
   // This would need a contact endpoint
   return Promise.resolve();
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const bookSession = async (sessionData: any): Promise<void> => {
   return createBooking(sessionData, localStorage.getItem('token') || '');
 };
 // Payment endpoints
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createPayment = async (paymentData: any, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/payments/create`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/payments/create`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -249,7 +256,7 @@ export const createPayment = async (paymentData: any, token: string) => {
 };
 
 export const getPaymentByBooking = async (bookingId: string, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/payments/booking/${bookingId}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/payments/booking/${bookingId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -258,7 +265,7 @@ export const getPaymentByBooking = async (bookingId: string, token: string) => {
 };
 
 export const getPaymentsByUser = async (userId: string, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/payments/user/${userId}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/payments/user/${userId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -267,7 +274,7 @@ export const getPaymentsByUser = async (userId: string, token: string) => {
 };
 
 export const getAllPayments = async (token: string) => {
-  const response = await fetch(`${API_BASE_URL}/payments/all`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/payments/all`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -276,7 +283,7 @@ export const getAllPayments = async (token: string) => {
 };
 
 export const getPaymentsByStatus = async (status: string, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/payments/status/${status}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/payments/status/${status}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -291,7 +298,7 @@ export const updatePaymentStatus = async (
   token: string,
   scannerUrl?: string
 ) => {
-  const response = await fetch(`${API_BASE_URL}/payments/verify/${paymentId}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/payments/verify/${paymentId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -303,7 +310,7 @@ export const updatePaymentStatus = async (
 };
 
 export const getPaymentStats = async (token: string) => {
-  const response = await fetch(`${API_BASE_URL}/payments/stats/overview`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/payments/stats/overview`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -313,12 +320,12 @@ export const getPaymentStats = async (token: string) => {
 
 // Scanner endpoints
 export const getActiveScanners = async () => {
-  const response = await fetch(`${API_BASE_URL}/scanners/active`);
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/scanners/active`);
   return handleResponse(response);
 };
 
 export const getAllScanners = async (token: string) => {
-  const response = await fetch(`${API_BASE_URL}/scanners/all`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/scanners/all`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -326,8 +333,9 @@ export const getAllScanners = async (token: string) => {
   return handleResponse(response);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const uploadScanner = async (scannerData: any, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/scanners/upload`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/scanners/upload`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -338,8 +346,9 @@ export const uploadScanner = async (scannerData: any, token: string) => {
   return handleResponse(response);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const updateScanner = async (scannerId: string, scannerData: any, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/scanners/${scannerId}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/scanners/${scannerId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -351,7 +360,7 @@ export const updateScanner = async (scannerId: string, scannerData: any, token: 
 };
 
 export const deleteScanner = async (scannerId: string, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/scanners/${scannerId}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/scanners/${scannerId}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -361,7 +370,7 @@ export const deleteScanner = async (scannerId: string, token: string) => {
 };
 
 export const toggleScannerStatus = async (scannerId: string, token: string) => {
-  const response = await fetch(`${API_BASE_URL}/scanners/${scannerId}/toggle`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/scanners/${scannerId}/toggle`, {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,

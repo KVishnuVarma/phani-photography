@@ -28,7 +28,7 @@ const Register: React.FC = () => {
     try {
       await registerUser(username, email, password);
       // Auto login after registration
-      const loginResponse = await fetch('http://localhost:5000/api/auth/login', {
+      const loginResponse = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login `, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
