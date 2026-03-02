@@ -20,10 +20,13 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // CORS middleware
+const corsOrigins = [
+  process.env.FRONTEND_URL,
+  'http://localhost:5173',
+].filter((origin): origin is string => Boolean(origin));
+
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-  ],
+  origin: corsOrigins,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
