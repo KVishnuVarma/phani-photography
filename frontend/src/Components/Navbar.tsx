@@ -12,6 +12,14 @@ const Navbar: React.FC = () => {
     navigate('/');
   };
 
+  const handleHomeClick = () => {
+    if (isAuthenticated) {
+      navigate('/user/dashboard');
+    } else {
+      navigate('/');
+    }
+  };
+
   return (
     <nav className="fixed top-0 w-full z-50 bg-neutral-50/95 dark:bg-neutral-950/95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-4 flex justify-between items-center">
@@ -19,9 +27,9 @@ const Navbar: React.FC = () => {
           Photography Studio
         </Link>
         <div className="flex gap-3 sm:gap-6 items-center">
-          <Link to="/" className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition">
+          <button onClick={handleHomeClick} className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition cursor-pointer bg-transparent border-none p-0">
             Home
-          </Link>
+          </button>
           <Link to="/gallery" className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition">
             Gallery
           </Link>
