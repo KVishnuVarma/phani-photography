@@ -151,8 +151,7 @@ const HomePage: React.FC = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              {reviews.slice(0, 6).map((review, index) => (
+              {reviews.slice(0, 6).map((review) => (
                 <ReviewCard
                   key={review._id}
                   review={review}
