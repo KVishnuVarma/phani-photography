@@ -8,11 +8,12 @@ import AdminPackageManagement from './Admin/AdminPackageManagement';
 import AdminBookingManagement from './Admin/AdminBookingManagement';
 import AdminPaymentVerification from './Admin/AdminPaymentVerification';
 import AdminScannerManagement from './Admin/AdminScannerManagement';
+import AdminReviewManagement from './Admin/AdminReviewManagement';
 
 const AdminDashboard: React.FC = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'bookings' | 'packages' | 'gallery' | 'payments' | 'scanners'>(
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'bookings' | 'packages' | 'gallery' | 'payments' | 'scanners' | 'reviews'>(
     'dashboard'
   );
 
@@ -27,6 +28,7 @@ const AdminDashboard: React.FC = () => {
     { id: 'packages' as const, label: '📦 Packages', icon: '📦' },
     { id: 'gallery' as const, label: '🖼️ Gallery', icon: '🖼️' },
     { id: 'scanners' as const, label: '📱 Scanners', icon: '📱' },
+    { id: 'reviews' as const, label: '⭐ Reviews', icon: '⭐' },
     { id: 'payments' as const, label: '💰 Payments', icon: '💰' },
   ];
 
@@ -76,6 +78,7 @@ const AdminDashboard: React.FC = () => {
           {activeTab === 'packages' && <AdminPackageManagement />}
           {activeTab === 'gallery' && <AdminGalleryManagement />}
           {activeTab === 'scanners' && <AdminScannerManagement />}
+          {activeTab === 'reviews' && <AdminReviewManagement />}
           {activeTab === 'payments' && <AdminPaymentVerification />}
         </div>
       </div>

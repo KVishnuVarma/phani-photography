@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { getUserBookings } from "../../api";
 import ThemeToggle from "../../Components/ThemeToggle";
+import ReviewForm from "../../Components/ReviewForm";
 
 interface Booking {
   _id: string;
@@ -46,7 +47,12 @@ const UserDashboard: React.FC = () => {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-neutral-50/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-primary-700 dark:text-primary-400">Photography Studio</h1>
+          <button
+            onClick={() => navigate("/")}
+            className="text-2xl font-bold text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 transition cursor-pointer bg-transparent border-none p-0"
+          >
+            Photography Studio
+          </button>
           <div className="flex gap-6 items-center">
             <button
               onClick={() => navigate("/")}
@@ -334,6 +340,17 @@ const UserDashboard: React.FC = () => {
               </p>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Share Your Experience Section */}
+      <section className="bg-neutral-50 dark:bg-neutral-950 px-6 md:px-16 py-16">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold mb-8 text-center text-primary-700 dark:text-primary-400">Share Your Experience</h2>
+          <p className="text-center text-neutral-600 dark:text-neutral-400 mb-12 max-w-2xl mx-auto">
+            We'd love to hear about your photography experience with us! Your feedback helps us improve and grow.
+          </p>
+          <ReviewForm />
         </div>
       </section>
 

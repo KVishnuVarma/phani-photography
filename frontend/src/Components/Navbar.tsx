@@ -23,9 +23,12 @@ const Navbar: React.FC = () => {
   return (
     <nav className="fixed top-0 w-full z-50 bg-neutral-50/95 dark:bg-neutral-950/95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-4 flex justify-between items-center">
-        <Link to="/" className="text-xl sm:text-2xl font-bold text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 transition">
+        <button
+          onClick={() => navigate('/')}
+          className="text-xl sm:text-2xl font-bold text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 transition cursor-pointer bg-transparent border-none p-0"
+        >
           Photography Studio
-        </Link>
+        </button>
         <div className="flex gap-3 sm:gap-6 items-center">
           <button onClick={handleHomeClick} className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition cursor-pointer bg-transparent border-none p-0">
             Home

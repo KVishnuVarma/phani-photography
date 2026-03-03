@@ -1,9 +1,31 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from '../Components/Navbar';
+import ReviewCard from '../Components/ReviewCard';
+import { getAllReviews } from '../api';
 
 const HomePage: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [reviews, setReviews] = useState<any[]>([]);
+  const [loadingReviews, setLoadingReviews] = useState(true);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const data = await getAllReviews();
+        setReviews(data);
+      } catch (error) {
+        console.error('Error fetching reviews:', error);
+      } finally {
+        setLoadingReviews(false);
+      }
+    };
+
+    fetchReviews();
+  }, []);
+
   return (
     <div className="w-full min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50">
       {/* Navigation */}
@@ -100,6 +122,55 @@ const HomePage: React.FC = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </motion.section>
+
+      {/* Testimonials/Reviews Section */}
+      <motion.section
+        className="bg-neutral-100 dark:bg-neutral-900 px-4 sm:px-6 md:px-8 py-16 sm:py-24"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-3 sm:mb-4 text-center text-primary-700 dark:text-primary-400">
+            What Our Clients Say
+          </h2>
+          <p className="text-center text-neutral-600 dark:text-neutral-400 mb-12 sm:mb-16 max-w-2xl sm:max-w-3xl mx-auto text-base sm:text-lg">
+            Hear from our satisfied clients who have made lasting memories with us
+          </p>
+
+          {loadingReviews ? (
+            <div className="text-center text-neutral-600 dark:text-neutral-400 py-12">
+              <p className="text-lg">Loading reviews...</p>
+            </div>
+          ) : reviews.length === 0 ? (
+            <div className="text-center text-neutral-600 dark:text-neutral-400 py-12">
+              <p className="text-lg">No reviews yet. Be the first to share your experience!</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              {reviews.slice(0, 6).map((review, index) => (
+                <ReviewCard
+                  key={review._id}
+                  review={review}
+                  onDeleteSuccess={() => {
+                    setReviews(reviews.filter((r) => r._id !== review._id));
+                  }}
+                />
+              ))}
+            </div>
+          )}
+
+          {reviews.length > 6 && (
+            <div className="mt-8 text-center">
+              <p className="text-neutral-600 dark:text-neutral-400 mb-4">
+                Showing 6 of {reviews.length} reviews
+              </p>
+            </div>
+          )}
         </div>
       </motion.section>
 

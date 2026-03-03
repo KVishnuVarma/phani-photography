@@ -378,3 +378,50 @@ export const toggleScannerStatus = async (scannerId: string, token: string) => {
   });
   return handleResponse(response);
 };
+
+// Review endpoints
+export const getAllReviews = async () => {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/reviews`);
+  return handleResponse(response);
+};
+
+export const getUserReviews = async (userId: string) => {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/reviews/user/${userId}`);
+  return handleResponse(response);
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const createReview = async (reviewData: any, token: string) => {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/reviews`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(reviewData),
+  });
+  return handleResponse(response);
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const updateReview = async (reviewId: string, reviewData: any, token: string) => {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/reviews/${reviewId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(reviewData),
+  });
+  return handleResponse(response);
+};
+
+export const deleteReview = async (reviewId: string, token: string) => {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/reviews/${reviewId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return handleResponse(response);
+};
