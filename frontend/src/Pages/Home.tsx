@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Briefcase, MessageSquare, Star, Trophy, Camera } from 'lucide-react';
 import Navbar from '../Components/Navbar';
 import ReviewCard from '../Components/ReviewCard';
 import { getAllReviews } from '../api';
@@ -81,7 +81,10 @@ const HomePage: React.FC = () => {
         viewport={{ once: true, amount: 0.3 }}
       >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-3 sm:mb-4 text-center text-primary-700 dark:text-primary-400">Our Signature Services</h2>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Briefcase size={36} className="text-primary-700 dark:text-primary-400" />
+            <h2 className="text-4xl sm:text-5xl font-bold text-center text-primary-700 dark:text-primary-400">Our Signature Services</h2>
+          </div>
           <p className="text-center text-neutral-600 dark:text-neutral-400 mb-12 sm:mb-16 max-w-2xl sm:max-w-3xl mx-auto text-base sm:text-lg">
             From traditional weddings to cinematic outdoor shoots, we craft each frame with heart.
           </p>
@@ -134,9 +137,12 @@ const HomePage: React.FC = () => {
         viewport={{ once: true, amount: 0.3 }}
       >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-3 sm:mb-4 text-center text-primary-700 dark:text-primary-400">
-            What Our Clients Say
-          </h2>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <MessageSquare size={36} className="text-primary-700 dark:text-primary-400" />
+            <h2 className="text-4xl sm:text-5xl font-bold text-center text-primary-700 dark:text-primary-400">
+              What Our Clients Say
+            </h2>
+          </div>
           <p className="text-center text-neutral-600 dark:text-neutral-400 mb-12 sm:mb-16 max-w-2xl sm:max-w-3xl mx-auto text-base sm:text-lg">
             Hear from our satisfied clients who have made lasting memories with us
           </p>
@@ -182,7 +188,10 @@ const HomePage: React.FC = () => {
         viewport={{ once: true }}
       >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-12 sm:mb-16 text-center">Why Choose Us?</h2>
+          <div className="flex items-center justify-center gap-3 mb-12 sm:mb-16">
+            <Star size={36} className="text-neutral-50" />
+            <h2 className="text-4xl sm:text-5xl font-bold text-center">Why Choose Us?</h2>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12">
             {[
@@ -231,7 +240,10 @@ const HomePage: React.FC = () => {
         viewport={{ once: true, amount: 0.3 }}
       >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-3 sm:mb-4 text-center text-primary-700 dark:text-primary-400">Admin Achievements 🏆</h2>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Trophy size={36} className="text-primary-700 dark:text-primary-400" />
+            <h2 className="text-4xl sm:text-5xl font-bold text-center text-primary-700 dark:text-primary-400">Admin Achievements</h2>
+          </div>
           <p className="text-center text-neutral-600 dark:text-neutral-400 mb-12 sm:mb-16 max-w-2xl sm:max-w-3xl mx-auto text-base sm:text-lg">
             Celebrating our studio's excellence and milestones
           </p>
@@ -309,7 +321,10 @@ const HomePage: React.FC = () => {
         viewport={{ once: true }}
       >
         <div className="max-w-2xl sm:max-w-3xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 sm:mb-6">Ready to Capture Your Moment?</h2>
+          <div className="flex items-center justify-center gap-3 mb-6 sm:mb-8">
+            <Camera size={40} className="text-white" />
+            <h2 className="text-4xl sm:text-5xl font-bold">Ready to Capture Your Moment?</h2>
+          </div>
           <p className="text-base sm:text-xl mb-6 sm:mb-8">Browse our packages and book your session today</p>
           <Link
             to="/packages"

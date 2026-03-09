@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { Package as PackageIcon } from 'lucide-react';
 import { getAllPackages } from '../api';
 import { useAuth } from '../context/AuthContext';
 import Navbar from '../Components/Navbar';
@@ -66,7 +67,10 @@ const PackagesPage: React.FC = () => {
         transition={{ duration: 0.8 }}
         className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-20 pt-24"
       >
-        <h1 className="text-4xl sm:text-5xl font-bold mb-3 sm:mb-4 text-center text-primary-700 dark:text-primary-400">Our Packages</h1>
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <PackageIcon size={36} className="text-primary-700 dark:text-primary-400" />
+          <h1 className="text-4xl sm:text-5xl font-bold text-center text-primary-700 dark:text-primary-400">Our Packages</h1>
+        </div>
         <p className="text-center text-neutral-600 dark:text-neutral-400 mb-12 sm:mb-16 text-base sm:text-lg">
           Choose the perfect package for your special moment
         </p>

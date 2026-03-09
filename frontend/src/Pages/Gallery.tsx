@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Image } from 'lucide-react';
 import { getGalleryImages } from '../api';
 import Navbar from '../Components/Navbar';
 
@@ -50,7 +51,10 @@ const GalleryPage: React.FC = () => {
         transition={{ duration: 0.8 }}
         className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-20 pt-24"
       >
-        <h1 className="text-4xl sm:text-5xl font-bold mb-3 sm:mb-4 text-center text-primary-700 dark:text-primary-400">Our Gallery</h1>
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <Image size={36} className="text-primary-700 dark:text-primary-400" />
+          <h1 className="text-4xl sm:text-5xl font-bold text-center text-primary-700 dark:text-primary-400">Our Gallery</h1>
+        </div>
         <p className="text-center text-neutral-600 dark:text-neutral-400 mb-12 sm:mb-16 text-base sm:text-lg">
           Explore our stunning collection of photography
         </p>

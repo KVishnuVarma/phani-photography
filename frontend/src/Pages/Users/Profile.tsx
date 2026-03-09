@@ -2,58 +2,17 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import ThemeToggle from "../../Components/ThemeToggle";
+import { User, Mail, Calendar, CheckCircle, Crown, RefreshCw, LayoutDashboard, Package, Image } from "lucide-react";
+import Navbar from "../../Components/Navbar";
 
 const Profile: React.FC = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
 
   return (
     <div className="w-full font-sans text-neutral-900 dark:text-white bg-neutral-50 dark:bg-neutral-950 overflow-x-hidden">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-neutral-50/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-primary-700 dark:text-primary-400">Photography Studio</h1>
-          <div className="flex gap-6 items-center">
-            <button
-              onClick={() => navigate("/")}
-              className="hover:text-primary-700 dark:hover:text-primary-400 transition"
-            >
-              Home
-            </button>
-            <button
-              onClick={() => navigate("/gallery")}
-              className="hover:text-primary-600 dark:hover:text-primary-400 transition"
-            >
-              Gallery
-            </button>
-            <button
-              onClick={() => navigate("/packages")}
-              className="hover:text-primary-600 dark:hover:text-primary-400 transition"
-            >
-              Packages
-            </button>
-            <button
-              onClick={() => navigate("/user/dashboard")}
-              className="hover:text-primary-600 dark:hover:text-primary-400 transition"
-            >
-              Dashboard
-            </button>
-            <button
-              onClick={handleLogout}
-              className="bg-primary-600 text-white px-6 py-2 rounded hover:bg-primary-700 transition"
-            >
-              Logout
-            </button>
-            <ThemeToggle />
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Profile Hero Section */}
       <section className="relative w-full bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-900 dark:to-primary-950 px-6 md:px-16 py-20 mt-16">
@@ -91,21 +50,35 @@ const Profile: React.FC = () => {
       {/* Profile Details Section */}
       <section className="bg-neutral-50 dark:bg-neutral-950 px-6 md:px-16 py-16">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-primary-700 dark:text-primary-400">👤 Profile Details</h2>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-12"
+          >
+            <h2 className="text-3xl font-bold mb-2 text-primary-700 dark:text-primary-400 flex items-center gap-3">
+              <User size={32} />
+              Profile Details
+            </h2>
+            <p className="text-neutral-600 dark:text-neutral-400">Manage your account information</p>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Username Card */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="bg-white dark:bg-neutral-800 p-8 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-400 dark:hover:border-primary-600 transition"
+              className="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 hover:shadow-lg dark:hover:shadow-xl hover:border-primary-400 dark:hover:border-primary-600 transition"
             >
               <div className="flex items-start gap-4">
-                <div className="text-5xl">👤</div>
+                <div className="p-3 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
+                  <User size={24} className="text-primary-700 dark:text-primary-400" />
+                </div>
                 <div className="flex-1">
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 font-medium mb-2">Username</p>
-                  <p className="text-2xl font-bold text-neutral-900 dark:text-white">{user?.username}</p>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 font-semibold mb-1 uppercase tracking-wide">Username</p>
+                  <p className="text-xl font-bold text-neutral-900 dark:text-white break-all">{user?.username}</p>
                 </div>
               </div>
             </motion.div>
@@ -113,15 +86,18 @@ const Profile: React.FC = () => {
             {/* Email Card */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="bg-white dark:bg-neutral-800 p-8 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-400 dark:hover:border-primary-600 transition"
+              className="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 hover:shadow-lg dark:hover:shadow-xl hover:border-primary-400 dark:hover:border-primary-600 transition"
             >
               <div className="flex items-start gap-4">
-                <div className="text-5xl">📧</div>
+                <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                  <Mail size={24} className="text-blue-700 dark:text-blue-400" />
+                </div>
                 <div className="flex-1">
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 font-medium mb-2">Email Address</p>
-                  <p className="text-lg font-bold text-neutral-900 dark:text-white break-all">{user?.email}</p>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 font-semibold mb-1 uppercase tracking-wide">Email Address</p>
+                  <p className="text-sm font-bold text-neutral-900 dark:text-white break-all">{user?.email}</p>
                 </div>
               </div>
             </motion.div>
@@ -129,14 +105,17 @@ const Profile: React.FC = () => {
             {/* Member Since Card */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="bg-white dark:bg-neutral-800 p-8 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-400 dark:hover:border-primary-600 transition"
+              className="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 hover:shadow-lg dark:hover:shadow-xl hover:border-primary-400 dark:hover:border-primary-600 transition"
             >
               <div className="flex items-start gap-4">
-                <div className="text-5xl">📅</div>
+                <div className="p-3 bg-amber-100 dark:bg-amber-900/30 rounded-lg">
+                  <Calendar size={24} className="text-amber-700 dark:text-amber-400" />
+                </div>
                 <div className="flex-1">
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 font-medium mb-2">Member Since</p>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 font-semibold mb-1 uppercase tracking-wide">Member Since</p>
                   <p className="text-lg font-bold text-neutral-900 dark:text-white">March 2026</p>
                 </div>
               </div>
@@ -145,31 +124,37 @@ const Profile: React.FC = () => {
             {/* Account Status */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className="bg-white dark:bg-neutral-800 p-8 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-400 dark:hover:border-primary-600 transition"
+              className="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 hover:shadow-lg dark:hover:shadow-xl hover:border-green-400 dark:hover:border-green-600 transition"
             >
               <div className="flex items-start gap-4">
-                <div className="text-5xl">✅</div>
+                <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-lg">
+                  <CheckCircle size={24} className="text-green-700 dark:text-green-400" />
+                </div>
                 <div className="flex-1">
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 font-medium mb-2">Account Status</p>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 font-semibold mb-1 uppercase tracking-wide">Account Status</p>
                   <p className="text-lg font-bold text-green-600 dark:text-green-400">Active</p>
                 </div>
               </div>
             </motion.div>
 
-            {/* Role */}
+            {/* Account Type */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.5 }}
-              className="bg-white dark:bg-neutral-800 p-8 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-400 dark:hover:border-primary-600 transition"
+              className="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 hover:shadow-lg dark:hover:shadow-xl hover:border-yellow-400 dark:hover:border-yellow-600 transition"
             >
               <div className="flex items-start gap-4">
-                <div className="text-5xl">👑</div>
+                <div className="p-3 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg">
+                  <Crown size={24} className="text-yellow-700 dark:text-yellow-400" />
+                </div>
                 <div className="flex-1">
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 font-medium mb-2">Account Type</p>
-                  <p className="text-lg font-bold text-primary-600 dark:text-primary-400">Premium Member</p>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 font-semibold mb-1 uppercase tracking-wide">Account Type</p>
+                  <p className="text-lg font-bold text-yellow-600 dark:text-yellow-400">Premium Member</p>
                 </div>
               </div>
             </motion.div>
@@ -177,14 +162,17 @@ const Profile: React.FC = () => {
             {/* Last Updated */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.6 }}
-              className="bg-white dark:bg-neutral-800 p-8 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-400 dark:hover:border-primary-600 transition"
+              className="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 hover:shadow-lg dark:hover:shadow-xl hover:border-purple-400 dark:hover:border-purple-600 transition"
             >
               <div className="flex items-start gap-4">
-                <div className="text-5xl">🔄</div>
+                <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                  <RefreshCw size={24} className="text-purple-700 dark:text-purple-400" />
+                </div>
                 <div className="flex-1">
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 font-medium mb-2">Last Updated</p>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 font-semibold mb-1 uppercase tracking-wide">Last Updated</p>
                   <p className="text-lg font-bold text-neutral-900 dark:text-white">Today</p>
                 </div>
               </div>
@@ -196,49 +184,82 @@ const Profile: React.FC = () => {
       {/* About You Section */}
       <section className="bg-neutral-100 dark:bg-neutral-900 px-6 md:px-16 py-16">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-primary-700 dark:text-primary-400">🎯 About You</h2>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-8"
+          >
+            <h2 className="text-3xl font-bold mb-2 text-primary-700 dark:text-primary-400">About Your Journey</h2>
+            <p className="text-neutral-600 dark:text-neutral-400">Your photography experience with us</p>
+          </motion.div>
           
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white dark:bg-neutral-800 p-8 rounded-lg border border-neutral-200 dark:border-neutral-700 max-w-2xl"
+            className="bg-white dark:bg-neutral-800 p-8 rounded-xl border border-neutral-200 dark:border-neutral-700 max-w-3xl shadow-lg"
           >
             <p className="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
-              Welcome to your photography studio profile! This is where you can manage your account details and track your photography journey with us.
+              Welcome to your professional photography profile! This is your personal space where you can track and manage all your photography sessions and bookings with us.
             </p>
-            <p className="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed">
-              From booking sessions to completing shoots, you're building an amazing portfolio. Keep memories alive by capturing moments that matter most to you!
+            <p className="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed mb-6">
+              Whether you're capturing precious family moments, celebrating milestones, or documenting special events, you're building an amazing portfolio of memories with us. Access your dashboard anytime to view your bookings, explore new packages, or browse our gallery of stunning photography.
             </p>
+            <div className="flex flex-wrap gap-4">
+              <div className="flex items-center gap-2 text-primary-700 dark:text-primary-400">
+                <CheckCircle size={20} />
+                <span className="font-semibold">Account Verified</span>
+              </div>
+              <div className="flex items-center gap-2 text-green-700 dark:text-green-400">
+                <CheckCircle size={20} />
+                <span className="font-semibold">All Services Active</span>
+              </div>
+              <div className="flex items-center gap-2 text-blue-700 dark:text-blue-400">
+                <CheckCircle size={20} />
+                <span className="font-semibold">Premium Support</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* Action Section */}
       <section className="bg-neutral-50 dark:bg-neutral-950 px-6 md:px-16 py-16">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8 text-primary-700 dark:text-primary-400">What's Next?</h2>
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl font-bold mb-2 text-primary-700 dark:text-primary-400">Quick Actions</h2>
+            <p className="text-neutral-600 dark:text-neutral-400">Navigate to different sections of the platform</p>
+          </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <motion.button
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
               onClick={() => navigate("/user/dashboard")}
-              className="bg-primary-600 text-white px-6 py-4 rounded-lg font-bold hover:bg-primary-700 transition border border-primary-700"
+              className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white px-8 py-5 rounded-xl font-bold transition shadow-lg hover:shadow-xl flex items-center justify-center gap-3"
             >
-              📊 View Dashboard
+              <LayoutDashboard size={24} />
+              View Dashboard
             </motion.button>
 
             <motion.button
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+              transition={{ delay: 0.15 }}
               onClick={() => navigate("/packages")}
-              className="bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-white px-6 py-4 rounded-lg font-bold hover:bg-neutral-300 dark:hover:bg-neutral-700 transition border border-neutral-300 dark:border-neutral-700"
+              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-5 rounded-xl font-bold transition shadow-lg hover:shadow-xl flex items-center justify-center gap-3"
             >
-              📸 Browse Packages
+              <Package size={24} />
+              Browse Packages
             </motion.button>
 
             <motion.button
@@ -247,9 +268,10 @@ const Profile: React.FC = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
               onClick={() => navigate("/gallery")}
-              className="bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-white px-6 py-4 rounded-lg font-bold hover:bg-neutral-300 dark:hover:bg-neutral-700 transition border border-neutral-300 dark:border-neutral-700"
+              className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-8 py-5 rounded-xl font-bold transition shadow-lg hover:shadow-xl flex items-center justify-center gap-3"
             >
-              🖼️ View Gallery
+              <Image size={24} />
+              View Gallery
             </motion.button>
           </div>
         </div>

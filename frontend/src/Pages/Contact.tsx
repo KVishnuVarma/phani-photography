@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import ThemeToggle from '../Components/ThemeToggle';
+import { Mail } from 'lucide-react';
+import Navbar from '../Components/Navbar';
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -36,14 +37,9 @@ const ContactPage: React.FC = () => {
   return (
     <div className="w-full min-h-screen bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-50">
       {/* Navigation */}
-      <nav className="sticky top-0 z-40 bg-neutral-50/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-700 px-4 sm:px-6 md:px-8 py-4">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <h1 className="text-xl sm:text-2xl font-bold text-primary-700 dark:text-primary-300">Get In Touch</h1>
-          <ThemeToggle />
-        </div>
-      </nav>
+      <Navbar />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-20 pt-24">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -51,7 +47,10 @@ const ContactPage: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-primary-800 dark:text-neutral-50">Contact Us</h1>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Mail size={40} className="text-primary-800 dark:text-neutral-50" />
+            <h1 className="text-4xl sm:text-5xl font-bold text-primary-800 dark:text-neutral-50">Contact Us</h1>
+          </div>
           <p className="text-primary-600 dark:text-neutral-400 text-base sm:text-lg max-w-2xl mx-auto">
             We'd love to hear from you. Whether you have an inquiry about our services or want to book your session, feel free to reach out.
           </p>

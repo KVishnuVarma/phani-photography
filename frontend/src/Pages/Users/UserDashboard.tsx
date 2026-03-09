@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { getUserBookings } from "../../api";
-import ThemeToggle from "../../Components/ThemeToggle";
+import { User, Calendar, Trophy, MessageSquare, Package } from "lucide-react";
+import Navbar from "../../Components/Navbar";
 import ReviewForm from "../../Components/ReviewForm";
 
 interface Booking {
@@ -16,7 +17,7 @@ interface Booking {
 }
 
 const UserDashboard: React.FC = () => {
-  const { user, token, logout } = useAuth();
+  const { user, token } = useAuth();
   const navigate = useNavigate();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
@@ -37,58 +38,10 @@ const UserDashboard: React.FC = () => {
     fetchBookings();
   }, [user, token]);
 
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
-
   return (
     <div className="w-full font-sans text-neutral-900 dark:text-white bg-neutral-50 dark:bg-neutral-950 overflow-x-hidden">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-neutral-50/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <button
-            onClick={() => navigate("/")}
-            className="text-2xl font-bold text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 transition cursor-pointer bg-transparent border-none p-0"
-          >
-            Photography Studio
-          </button>
-          <div className="flex gap-6 items-center">
-            <button
-              onClick={() => navigate("/")}
-              className="hover:text-primary-600 dark:hover:text-primary-400 transition"
-            >
-              Home
-            </button>
-            <button
-              onClick={() => navigate("/gallery")}
-              className="hover:text-primary-600 dark:hover:text-primary-400 transition"
-            >
-              Gallery
-            </button>
-            <button
-              onClick={() => navigate("/packages")}
-              className="hover:text-primary-600 dark:hover:text-primary-400 transition"
-            >
-              Packages
-            </button>
-            {/* Profile Button */}
-            <button
-              onClick={() => navigate("/profile")}
-              className="hover:text-primary-600 dark:hover:text-primary-400 transition font-medium"
-            >
-              Profile
-            </button>
-            <button
-              onClick={handleLogout}
-              className="bg-primary-600 text-white px-6 py-2 rounded hover:bg-primary-700 transition"
-            >
-              Logout
-            </button>
-            <ThemeToggle />
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero Section - Photography Summary */}
       <section className="relative w-full bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-900 dark:to-primary-950 px-6 md:px-16 py-20 mt-16">
@@ -99,9 +52,12 @@ const UserDashboard: React.FC = () => {
             transition={{ duration: 1 }}
             className="text-center text-white mb-12"
           >
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-              Welcome, {user?.username}! 📸
-            </h1>
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <User size={40} />
+              <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
+                Welcome, {user?.username}!
+              </h1>
+            </div>
             <p className="text-lg md:text-xl text-neutral-100 max-w-2xl mx-auto">
               Capture moments, create memories. Explore your photography journey with us.
             </p>
@@ -152,7 +108,10 @@ const UserDashboard: React.FC = () => {
       {/* Bookings Section */}
       <section className="bg-neutral-50 dark:bg-neutral-950 px-6 md:px-16 py-16">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6 text-primary-700 dark:text-primary-400">Your Bookings</h2>
+          <div className="flex items-center gap-3 mb-6">
+            <Calendar size={32} className="text-primary-700 dark:text-primary-400" />
+            <h2 className="text-3xl font-bold text-primary-700 dark:text-primary-400">Your Bookings</h2>
+          </div>
 
           {loading ? (
             <div className="text-neutral-600 dark:text-neutral-400 text-center py-8">Loading bookings...</div>
@@ -221,7 +180,10 @@ const UserDashboard: React.FC = () => {
       {/* Achievements Section */}
       <section className="bg-neutral-100 dark:bg-neutral-900 px-6 md:px-16 py-16">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-primary-700 dark:text-primary-400">Admin Achievements 🏆</h2>
+          <div className="flex items-center gap-3 mb-8">
+            <Trophy size={32} className="text-primary-700 dark:text-primary-400" />
+            <h2 className="text-3xl font-bold text-primary-700 dark:text-primary-400">Admin Achievements</h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Achievement: Photography Virtuoso */}
             <motion.div
@@ -346,7 +308,10 @@ const UserDashboard: React.FC = () => {
       {/* Share Your Experience Section */}
       <section className="bg-neutral-50 dark:bg-neutral-950 px-6 md:px-16 py-16">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center text-primary-700 dark:text-primary-400">Share Your Experience</h2>
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <MessageSquare size={32} className="text-primary-700 dark:text-primary-400" />
+            <h2 className="text-3xl font-bold text-center text-primary-700 dark:text-primary-400">Share Your Experience</h2>
+          </div>
           <p className="text-center text-neutral-600 dark:text-neutral-400 mb-12 max-w-2xl mx-auto">
             We'd love to hear about your photography experience with us! Your feedback helps us improve and grow.
           </p>
@@ -361,7 +326,10 @@ const UserDashboard: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold mb-4 text-primary-700 dark:text-primary-400">Ready for More?</h2>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Package size={32} className="text-primary-700 dark:text-primary-400" />
+            <h2 className="text-3xl font-bold text-primary-700 dark:text-primary-400">Ready for More?</h2>
+          </div>
           <p className="text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl mx-auto">
             Explore our gallery and book your next photography session
           </p>
